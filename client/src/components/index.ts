@@ -1,0 +1,3 @@
+/* 
+    this is component folder where you put your reusable react components
+*/

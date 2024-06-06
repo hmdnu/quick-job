@@ -1,0 +1,3 @@
+/*
+    this folder is basically for your pages
+*/
