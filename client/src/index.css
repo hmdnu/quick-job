@@ -21,8 +21,8 @@ body {
   .btn-md-fill {
     @apply border-none bg-green-90 rounded-lg text-white px-4 py-2;
   }
-  .btn-sm-fill {
-    @apply border-none bg-green-90 rounded-lg text-white px-3 py-3;
+  .btn-xl-fill {
+    @apply border-none bg-green-90 rounded-lg text-white px-4 py-3;
   }
 
   .max-container {
