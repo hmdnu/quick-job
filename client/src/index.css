@@ -16,13 +16,13 @@ body {
 
 @layer utilities {
   .btn-sm-fill {
-    @apply border-none bg-green-90 rounded-lg text-white px-3 py-1;
+    @apply border-none rounded-lg hover:bg-opacity-50 focus:bg-opacity-50 px-3 py-1;
   }
   .btn-md-fill {
-    @apply border-none bg-green-90 rounded-lg text-white px-4 py-2;
+    @apply border-none rounded-lg hover:bg-opacity-50 focus:bg-opacity-50 px-4 py-2;
   }
   .btn-xl-fill {
-    @apply border-none bg-green-90 rounded-lg text-white px-4 py-3;
+    @apply border-none rounded-lg hover:bg-opacity-50 focus:bg-opacity-50 px-4 py-3;
   }
 
   .max-container {
@@ -54,7 +54,7 @@ body {
   }
 
   .text-xs-r {
-    @apply text-xs font-normal leading-4;
+    @apply text-xs font-normal leading-3;
   }
 
   .text-sm-r {
@@ -62,7 +62,7 @@ body {
   }
 
   .text-sm-s {
-    @apply text-sm font-bold leading-5;
+    @apply text-sm font-semibold leading-3;
   }
 
   .text-md-r {
@@ -79,6 +79,10 @@ body {
 
   .text-xl-s {
     @apply text-xl font-bold leading-7;
+  }
+
+  .text-2xl-s {
+    @apply text-2xl font-bold leading-[32px];
   }
 
   .text-5xl-s {
