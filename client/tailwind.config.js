@@ -29,15 +29,15 @@ export default {
           10: "#FF4E64",
         },
         goku: "#F5F5F5",
-        gohan: "#F1F1F1",
+        gohan: "#FFFFFF",
         bulma: "#0C0B0B",
         trunks: "#595D62",
       },
       maxWidth: {
         "10xl": "1512px",
       },
-      bg: {
-        navbar: "url('/img/bg-navbar')",
+      backgroundImage: {
+        navbar: "url('/img/bg-navbar.png')",
       },
     },
   },
