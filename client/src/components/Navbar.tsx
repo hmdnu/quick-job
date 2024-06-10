@@ -2,7 +2,7 @@ import { PROFILE_LINKS } from "../constant";
 
 const Navbar = () => {
   return (
-    <nav className="bg-navbar bg-center">
+    <nav className="fixed w-full top-0 bg-navbar bg-center">
       <div className="static max-w-screen-xl flex flex-row items-center gap-[20px] justify-between md:justify-start mx-auto p-4">
         {/* Logo */}
         <a
