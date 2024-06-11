@@ -6,7 +6,7 @@ const Vacancy = () => {
     <section className="mt-[120px] md:flex md:justify-center lg:justify-start h-full xl:ml-[120px] mx-[20px] my-[20px] gap-[20px]">
       <div className="grid md:inline-block gap-[20px]">
         {DUMMY_VACANCY.map((vacancy) => (
-          <div className="md:mb-[20px] max-w-sm p-4 gap-[10px] bg-white border border-gray-200 rounded-lg shadow">
+          <div className="cursor-pointer md:mb-[20px] max-w-sm p-4 gap-[10px] bg-white border border-gray-200 rounded-lg shadow">
             <div className="flex justify-between">
               <div className="flex flexCenter gap-[10px]">
                 <img
