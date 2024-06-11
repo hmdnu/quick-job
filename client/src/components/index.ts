@@ -1,3 +1,5 @@
-/* 
-    this is component folder where you put your reusable react components
-*/
+import DetailVacancy from "./DetailVacancy";
+import Navbar from "./Navbar";
+import Vacancy from "./Vacancy";
+
+export { DetailVacancy, Navbar, Vacancy };

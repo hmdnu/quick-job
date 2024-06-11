@@ -1,13 +1,33 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Navbar from "./components/Navbar.tsx";
-import Vacancy from "./components/Vacancy.tsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
+import { Home, RootLayout } from "./views";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootLayout />,
+    errorElement: <h1>Error bro</h1>,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+    ],
+  },
+  {
+    path: "/login",
+    element: <h1>login page</h1>,
+  },
+  {
+    path: "/register",
+    element: <h1>register page</h1>,
+  },
+]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Navbar />
-    <Vacancy />
-    {/* <App /> */}
+    <RouterProvider router={router} />
   </React.StrictMode>
 );

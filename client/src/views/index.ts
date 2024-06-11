@@ -1,3 +1,4 @@
-/*
-    this folder is basically for your pages
-*/
+import Home from "./Home";
+import RootLayout from "./RootLayout";
+
+export { Home, RootLayout };
