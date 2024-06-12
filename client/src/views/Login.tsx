@@ -1,44 +1,39 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { z } from "zod";
+import { loginSchema } from "../schemas";
+import { useEffect, useState } from "react";
 
 interface Login {
   email: string;
   password: string;
 }
 
-const loginSchema = z.object({
-  email: z
-    .string({
-      required_error: "email is required",
-    })
-    .email(),
-  password: z.string({
-    required_error: "password is required",
-  }),
-});
-
 export default function Login() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<Login>({
+    criteriaMode: "all",
     resolver: zodResolver(loginSchema),
   });
 
-  function onSubmit(data) {}
+  const [seePassword, setSeePassword] = useState(false);
+
+  const onSubmit = (formData: Login) => {
+    console.log(formData);
+  };
+
+  useEffect(() => {
+    document.title = "Quick Job | Sign in";
+  }, []);
 
   return (
     <section className="h-dvh grid md:flex justify-center items-center p-5">
       <div className="grid md:flex gap-[50px]">
         <div className="hidden md:flex">
-          <img
-            src="/img/larry-sign.svg"
-            alt="larry-sign"
-            className="md:w-[300px] lg:w-full"
-          />
+          <img src="/img/larry-sign.svg" alt="larry-sign" className="md:w-[300px] lg:w-full" />
         </div>
         <div>
           <div className="flex flexEnd items-center gap-1">
@@ -49,15 +44,11 @@ export default function Login() {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="currentColor"
               className="size-6"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
-              />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
             </svg>
           </div>
           <div className="grid justify-items-end">
@@ -65,43 +56,37 @@ export default function Login() {
               Selamat <br className="hidden md:flex" />
               datang !
             </h1>
-            <img
-              src="/img/larry-sign.svg"
-              alt="larry-sign"
-              className="md:hidden h-[300px] mt-[-40px] mb-[5px]"
-            />
+            <img src="/img/larry-sign.svg" alt="larry-sign" className="md:hidden h-[300px] mt-[-40px] mb-[5px]" />
           </div>
           <form onSubmit={handleSubmit(onSubmit)} className="max-w-sm mx-auto">
             <div className="mb-5">
-              <label className="block mb-2 text-sm-r md:text-md-r text-green-90">
-                Your email
-              </label>
+              <label className="block mb-2 text-sm-r md:text-md-r text-green-90">Your email</label>
               <input
-                {...register("email", { required: true })}
                 type="email"
-                id="email"
                 className="w-full py-[8px] px-[12px] text-xs-r md:text-sm-r rounded-lg border-2 border-goku focus:outline-none"
                 placeholder="example@gmail.com"
-                required
+                {...register("email", { required: true })}
               />
+
+              <p className="text-red-600 text-sm">{errors.email?.message}</p>
             </div>
             <div className="mb-5">
-              <label className="block text-sm-r md:text-md-r mb-2 text-sm-r text-green-90">
-                Your password
-              </label>
+              <label className="block text-sm-r md:text-md-r mb-2 text-sm-r text-green-90">Your password</label>
               <input
-                type="password"
-                id="email"
+                type={seePassword ? "text" : "password"}
                 className="w-full py-[8px] px-[12px] text-xs-r md:text-sm-r rounded-lg border-2 border-goku focus:outline-none"
                 placeholder="**********"
-                required
+                {...register("password")}
               />
+
+              <p className="text-red-600 text-sm">{errors.password?.message}</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <input type="checkbox" onClick={() => setSeePassword((prev) => !prev)} />
+              <label className="text-sm">See password</label>
             </div>
             <div className="flex justify-between items-center">
-              <a
-                href="/"
-                className="text-red-90 underline text-sm-s md:text-sm-s"
-              >
+              <a href="/" className="text-red-90 underline text-sm-s md:text-sm-s">
                 Forgot Password?
               </a>
               <button
