@@ -1,6 +1,6 @@
 function DetailVacancy() {
   return (
-    <section className="md:basis-3/5 lg:basis-2/5 p-[20px] hidden h-full md:grid border border-gray-200 rounded-lg shadow">
+    <section className="sticky top-[120px] md:basis-3/5 lg:basis-2/5 p-[20px] hidden h-full md:grid border border-gray-200 rounded-lg shadow">
       <div className="grid justify-items-start">
         <div className="flex flexCenter gap-[10px]">
           <img
