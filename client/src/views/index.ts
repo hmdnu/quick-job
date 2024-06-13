@@ -1,5 +1,5 @@
 import Home from "./Home";
-import Login from "./Login";
+import Login from "./SignIn";
 import RootLayout from "./RootLayout";
 
 export { Home, RootLayout, Login };

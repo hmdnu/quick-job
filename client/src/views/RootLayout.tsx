@@ -1,11 +1,8 @@
-import { Outlet } from "react-router-dom";
-import { Navbar } from "../components";
+import { Navigate, Outlet } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 export default function RootLayout() {
-  return (
-    <div>
-      <Navbar />
-      <Outlet />
-    </div>
-  );
+  const [cookies] = useCookies(["access-token"]);
+
+  return <div>{cookies["access-token"] ? <Outlet /> : <Navigate to={"/signin"} />}</div>;
 }
