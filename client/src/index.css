@@ -15,8 +15,14 @@ body {
 }
 
 @layer utilities {
+  .btn-xs-secondary {
+    @apply border-none rounded-lg bg-opacity-20 focus:bg-opacity-0 px-2 py-1;
+  }
   .btn-sm-fill {
     @apply border-none rounded-lg hover:bg-opacity-50 focus:bg-opacity-50 px-3 py-1;
+  }
+  .btn-sm-secondary {
+    @apply border-none rounded-lg bg-opacity-20 focus:bg-opacity-0 px-3 py-1;
   }
   .btn-md-fill {
     @apply border-none rounded-lg hover:bg-opacity-50 focus:bg-opacity-50 px-4 py-2;
