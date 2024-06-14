@@ -1,27 +1,23 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { loginSchema } from "../schemas";
 import { useEffect, useState } from "react";
-
-interface Login {
-  email: string;
-  password: string;
-}
+import { ILogin } from "../types";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema } from "../schemas";
 
 export default function Login() {
+  const [seePassword, setSeePassword] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Login>({
+  } = useForm<ILogin>({
     criteriaMode: "all",
     resolver: zodResolver(loginSchema),
   });
 
-  const [seePassword, setSeePassword] = useState(false);
-
-  const onSubmit = (formData: Login) => {
+  const onSubmit = (formData: ILogin) => {
     console.log(formData);
   };
 
@@ -65,7 +61,7 @@ export default function Login() {
                 type="email"
                 className="w-full py-[8px] px-[12px] text-xs-r md:text-sm-r rounded-lg border-2 border-goku focus:outline-none"
                 placeholder="example@gmail.com"
-                {...register("email", { required: true })}
+                {...register("email")}
               />
 
               <p className="text-red-600 text-sm">{errors.email?.message}</p>
