@@ -1,7 +1,7 @@
 import { DUMMY_VACANCY } from "../constant";
 import DetailVacancy from "./DetailVacancy";
 
-const Vacancy = () => {
+export default function Vacancy() {
   return (
     <section className="mt-[120px] md:flex md:justify-center lg:justify-start h-full xl:ml-[120px] mx-[20px] my-[20px] gap-[20px]">
       <div className="grid md:inline-block gap-[20px]">
@@ -17,9 +17,7 @@ const Vacancy = () => {
                 <div className="flex lg:grid gap-1 items-center justify-start">
                   <h1 className="text-bulma text-sm-s">{vacancy.username}</h1>
                   <div className="lg:hidden bg-bulma h-1 w-1 rounded-full"></div>
-                  <h6 className="text-trunks text-xs-r">
-                    {vacancy.timestamp} lalu
-                  </h6>
+                  <h6 className="text-trunks text-xs-r">{vacancy.timestamp} lalu</h6>
                 </div>
               </div>
               <div className="lg:hidden lg:mt-[20px] h-full inline-block rounded-lg bg-chici-90 bg-opacity-30 px-[6px] pt-[6px]">
@@ -30,20 +28,12 @@ const Vacancy = () => {
               </div>
             </div>
             <div className="hidden mt-[20px] lg:inline-block rounded-lg bg-chici-90 bg-opacity-30 px-[6px] pt-[6px]">
-              <h5 className="mb-2 text-sm-s text-chici-90">
-                Kadaluarsa dalam {vacancy.exp}
-              </h5>
+              <h5 className="mb-2 text-sm-s text-chici-90">Kadaluarsa dalam {vacancy.exp}</h5>
             </div>
             <div className="grid mt-[10px] gap-[10px] md:gap-0">
-              <h1 className="text-sm-s md:text-md-s text-bulma">
-                {vacancy.title}
-              </h1>
-              <p className="line-clamp-1 lg:line-clamp-2 text-xs-r md:text-sm-r text-trunks">
-                {vacancy.desc}
-              </p>
-              <span className="text-xs-r md:text-sm-r text-trunks">
-                {vacancy.location}
-              </span>
+              <h1 className="text-sm-s md:text-md-s text-bulma">{vacancy.title}</h1>
+              <p className="line-clamp-1 lg:line-clamp-2 text-xs-r md:text-sm-r text-trunks">{vacancy.desc}</p>
+              <span className="text-xs-r md:text-sm-r text-trunks">{vacancy.location}</span>
             </div>
             <div className="mt-[10px] flex justify-end gap-[5px]">
               <button className="btn-sm-fill rounded-full bg-orange-90 text-white hover:text-orange-90 focus:text-orange-90 text-sm font-semibold">
@@ -72,12 +62,7 @@ const Vacancy = () => {
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
               </button>
             </div>
@@ -87,6 +72,4 @@ const Vacancy = () => {
       <DetailVacancy />
     </section>
   );
-};
-
-export default Vacancy;
+}
