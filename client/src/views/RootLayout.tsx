@@ -1,5 +1,5 @@
-import { Navigate, Outlet } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { Outlet } from "react-router-dom";
 import { Navbar } from "../components";
 
 export default function RootLayout() {
@@ -7,14 +7,8 @@ export default function RootLayout() {
 
   return (
     <>
-      {cookies["access-token"] ? (
-        <>
-          <Navbar />
-          <Outlet />
-        </>
-      ) : (
-        <Navigate to={"/signin"} />
-      )}
+      <Navbar />
+      <Outlet />
     </>
   );
 }

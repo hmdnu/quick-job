@@ -4,14 +4,9 @@ import { ILogin } from "../types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "../schemas";
-import { useCookies } from "react-cookie";
-
-import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [seePassword, setSeePassword] = useState(false);
-  const [cookie, setCookie] = useCookies(["access-token"]);
-  const navigate = useNavigate();
 
   const {
     register,
@@ -24,14 +19,7 @@ export default function Login() {
 
   const onSubmit = (formData: ILogin) => {
     console.log(formData);
-    setCookie("access-token", true);
   };
-
-  useEffect(() => {
-    if (cookie["access-token"]) {
-      navigate("/");
-    }
-  }, [cookie, navigate]);
 
   useEffect(() => {
     document.title = "Quick Job | Sign in";

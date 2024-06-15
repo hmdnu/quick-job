@@ -13,7 +13,7 @@ export const PROFILE_LINKS = [
 
 export const DUMMY_VACANCY = [
   {
-    key: "0",
+    key: 0,
     userImg: "/img/user.jpg",
     username: "Lavina Kim",
     timestamp: "1 menit",
@@ -22,9 +22,10 @@ export const DUMMY_VACANCY = [
     title: "Tolong dong yg bisa jastip jajan",
     desc: "Titip belikan makaroni ngehe hehehe, kirim ke gedung AX Polinema ya ! Rincian: Level 1 nya 2 Level 2 nya 1 Level 3 nya gak level :P Kalau kurang jelas bisa tanya duluu yaa lewat chatt Mwakasiii",
     location: "Lowokwaru, Malang",
+    status: "ongoing",
   },
   {
-    key: "1",
+    key: 1,
     userImg: "/img/user2.jpg",
     username: "Aqweena Kim",
     timestamp: "2 menit",
@@ -33,6 +34,7 @@ export const DUMMY_VACANCY = [
     title: "Ada yg bisa ngajarin materi gauss ?",
     desc: "Butuh seseorang yang ngelesin gue matematika materi gauss...",
     location: "Dinoyo, Malang",
+    status: "complete",
   },
 ];
 
