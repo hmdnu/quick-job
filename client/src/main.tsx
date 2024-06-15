@@ -2,9 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import { Home, RootLayout } from "./views";
+import { Home, Login, RootLayout } from "./views";
 import CreateVacancy from "./views/CreateVacancy";
-import Signin from "./views/SignIn";
+import Riwayat from "./views/Riwayat";
 import SignUp from "./views/SignUp";
 
 const router = createBrowserRouter([
@@ -17,16 +17,19 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
-
       {
         path: "/create-vacancy",
         element: <CreateVacancy />,
       },
+      {
+        path: "/riwayat",
+        element: <Riwayat />,
+      },
     ],
   },
   {
-    path: "/login",
-    element: <Signin />,
+    path: "/signin",
+    element: <Login />,
   },
   {
     path: "/signup",

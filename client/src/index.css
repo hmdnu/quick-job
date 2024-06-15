@@ -102,4 +102,8 @@ body {
   .text-8xl-s {
     @apply text-7xl font-bold leading-[76px];
   }
+
+  .btn-active {
+    @apply bg-white text-green-90;
+  }
 }
