@@ -1,17 +1,24 @@
 import { PROFILE_LINKS } from "../constant";
 
-export default function Navbar() {
+const Navbar = () => {
   return (
     <nav className="fixed w-full top-0 bg-navbar bg-center">
       <div className="static max-w-screen-xl flex flex-row items-center gap-[20px] justify-between md:justify-start mx-auto p-4">
         {/* Logo */}
-        <a href="/" className="flex md:grid justify-items-center basis-20 items-center space-x-3">
-          <img src="/img/logo-quickjob.png" className="h-[40px]" alt="Flowbite Logo" />
+        <a
+          href="/"
+          className="flex md:grid justify-items-center basis-20 items-center space-x-3"
+        >
+          <img
+            src="/img/logo-quickjob.png"
+            className="h-[40px]"
+            alt="Flowbite Logo"
+          />
           <span className="text-white text-md-s">QuickJob</span>
         </a>
 
         <div className="hidden md:flex flex-row justify-center gap-[20px] basis-3/4">
-          {/* Create Vacancy Button */}
+          {/* Creat Vacancy Button */}
           <button
             type="button"
             className="flex w-[220px] xl:basis-1/5 gap-2 text-green-90 bg-gohan px-4 py-2 hover:bg-orange-90 hover:text-white focus:outline-none focus:bg-orange-90 focus:text-white font-bold rounded-lg text-center"
@@ -24,7 +31,11 @@ export default function Navbar() {
               stroke="currentColor"
               className="size-6"
             >
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 4.5v15m7.5-7.5h-15"
+              />
             </svg>
             Buat Lowongan
           </button>
@@ -63,11 +74,17 @@ export default function Navbar() {
         {/* Profile */}
         <div className="hidden lg:grid absolute h-[274px] w-[268px] gap-[20px] rounded-lg bg-white border-2 border-trunks border-opacity-10 p-[15px] top-[24px] right-[20px]">
           <div className="w-full bg-green-90 flex justify-center py-2 rounded-lg">
-            <img src="/img/user.jpg" alt="user" className="w-[50px] h-[50px] rounded-full" />
+            <img
+              src="/img/user.jpg"
+              alt="user"
+              className="w-[50px] h-[50px] rounded-full"
+            />
           </div>
           <div className="flex flex-col items-center">
             <h1 className="text-bulma text-md-s">Lavina Kim</h1>
-            <h6 className="text-trunks text-xs-r">Malang, sejak 23 Agustus 2004</h6>
+            <h6 className="text-trunks text-xs-r">
+              Malang, sejak 23 Agustus 2004
+            </h6>
           </div>
           <ul className="h-full gap-3 lg:grid">
             {PROFILE_LINKS.map((link) => (
@@ -80,7 +97,16 @@ export default function Navbar() {
             ))}
           </ul>
         </div>
+        <button>
+          <img
+            src="/img/user.jpg"
+            alt="user"
+            className="w-[40px] h-[40px] rounded-full"
+          />
+        </button>
       </div>
     </nav>
   );
-}
+};
+
+export default Navbar;
