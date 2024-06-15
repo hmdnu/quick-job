@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  engineType = "library"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id String @unique
+  firstname String 
+  lastname String
+  email String @unique
+  username String @unique
+  password String
+  createdAt DateTime @default(now())
+  isWorker Boolean @default(false)
+  posts Post[]
+  job Job? 
+}
+
+model Post{
+  id String @unique
+  title String
+  desc String 
+  deadline DateTime
+  price Float
+  payment PAYMENT
+  createdAt DateTime @default(now())
+  creatorId String? 
+  creator User? @relation(fields: [creatorId], references: [id])
+  worker Job?
+  status POST_STATUS @default(ONGOING)
+  
+}
+
+model Job {
+  id String @unique
+  jobTitle String
+  isDone Boolean @default(false)
+  clientId String @unique
+  client User @relation(fields: [clientId], references: [id])
+  postId String @unique
+  post Post @relation(fields: [postId], references: [id])
+}
+
+enum POST_STATUS {
+  ONGOING
+  DONE
+  CANCELED
+}
+
+enum PAYMENT {
+  CASH
+  TRANSFER
+}
+
+
