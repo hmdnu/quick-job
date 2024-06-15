@@ -3,7 +3,8 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import { Home, RootLayout } from "./views";
-import Login from "./views/SignIn";
+import CreateVacancy from "./views/CreateVacancy";
+import Signin from "./views/SignIn";
 import SignUp from "./views/SignUp";
 
 const router = createBrowserRouter([
@@ -16,15 +17,16 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
+
       {
-        path: "/test",
-        element: <div>test</div>,
+        path: "/create-vacancy",
+        element: <CreateVacancy />,
       },
     ],
   },
   {
-    path: "/signin",
-    element: <Login />,
+    path: "/login",
+    element: <Signin />,
   },
   {
     path: "/signup",

@@ -36,3 +36,12 @@ export const DUMMY_VACANCY = [
     location: "Dinoyo, Malang",
   },
 ];
+
+export const TIME_BUTTON = [
+  { key: 1, label: "10 Menit" },
+  { key: 2, label: "20 Menit" },
+  { key: 3, label: "30 Menit" },
+  { key: 4, label: "45 Menit" },
+  { key: 5, label: "1 Jam" },
+  { key: 6, label: "Sampai Lowongan Dihapus" },
+];
