@@ -1,6 +1,5 @@
-/* 
-    this folder is used to save your constant not changing variable
-*/
+export const API_URL = import.meta.env.API_URL;
+
 export const PROFILE_LINKS = [
   { href: "/", key: "riwayat", icon: "/img/time.svg", label: "Riwayat" },
   {
