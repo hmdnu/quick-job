@@ -1,3 +1,105 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: DM Sans;
+}
+
+@layer utilities {
+  .btn-xs-secondary {
+    @apply border-none rounded-lg bg-opacity-20 focus:bg-opacity-0 px-2 py-1;
+  }
+  .btn-sm-fill {
+    @apply border-none rounded-lg hover:bg-opacity-50 focus:bg-opacity-50 px-3 py-1;
+  }
+  .btn-sm-secondary {
+    @apply border-none rounded-lg bg-opacity-20 focus:bg-opacity-0 px-3 py-1;
+  }
+  .btn-md-fill {
+    @apply border-none rounded-lg hover:bg-opacity-50 focus:bg-opacity-50 px-4 py-2;
+  }
+  .btn-xl-fill {
+    @apply border-none rounded-lg hover:bg-opacity-50 focus:bg-opacity-50 px-4 py-3;
+  }
+
+  .max-container {
+    @apply mx-auto max-w-[1440px];
+  }
+
+  .padding-container {
+    @apply px-6 lg:px-20;
+  }
+
+  .flexCenter {
+    @apply flex items-center justify-center;
+  }
+
+  .flexBetween {
+    @apply flex items-center justify-between;
+  }
+
+  .flexStart {
+    @apply flex items-center justify-start;
+  }
+
+  .flexEnd {
+    @apply flex items-center justify-end;
+  }
+
+  .text-2xs-r {
+    @apply text-[10px] font-normal leading-4;
+  }
+
+  .text-xs-r {
+    @apply text-xs font-normal leading-3;
+  }
+
+  .text-xs-s {
+    @apply text-xs font-bold leading-3;
+  }
+
+  .text-sm-r {
+    @apply text-sm font-normal leading-5;
+  }
+
+  .text-sm-s {
+    @apply text-sm font-semibold leading-3;
+  }
+
+  .text-md-r {
+    @apply text-base font-normal leading-6;
+  }
+
+  .text-md-s {
+    @apply text-base font-bold leading-6;
+  }
+
+  .text-lg-s {
+    @apply text-lg font-bold leading-7;
+  }
+
+  .text-xl-s {
+    @apply text-xl font-bold leading-7;
+  }
+
+  .text-2xl-s {
+    @apply text-2xl font-bold leading-[32px];
+  }
+
+  .text-5xl-s {
+    @apply text-5xl font-bold leading-[56px];
+  }
+
+  .text-8xl-s {
+    @apply text-7xl font-bold leading-[76px];
+  }
+}

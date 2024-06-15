@@ -2,21 +2,35 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import Home from "./views/Home";
+import { Home, RootLayout } from "./views";
+import CreateVacancy from "./views/CreateVacancy";
+import Signin from "./views/SignIn";
+import SignUp from "./views/SignUp";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <RootLayout />,
     errorElement: <h1>Error bro</h1>,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+
+      {
+        path: "/create-vacancy",
+        element: <CreateVacancy />,
+      },
+    ],
   },
   {
     path: "/login",
-    element: <h1>login page</h1>,
+    element: <Signin />,
   },
   {
-    path: "/register",
-    element: <h1>register page</h1>,
+    path: "/signup",
+    element: <SignUp />,
   },
 ]);
 
