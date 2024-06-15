@@ -1,9 +1,8 @@
-import { Navbar, Vacancy } from "../components";
+import { Vacancy } from "../components";
 export default function Home() {
   return (
-    <div>
-      <Navbar />
+    <>
       <Vacancy />
-    </div>
+    </>
   );
 }
