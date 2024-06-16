@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 import { API_URL } from "../constant";
 import { ILogin, IRegister } from "../types";
@@ -6,7 +6,8 @@ import { ILogin, IRegister } from "../types";
 export function useLogin() {
   const { data, error, isPending, isError, mutate, isSuccess } = useMutation({
     mutationKey: ["login"],
-    mutationFn: (formData: ILogin) => axios.post(API_URL + "/user/login", formData),
+    mutationFn: (formData: ILogin) =>
+      axios.post(API_URL + "/user/login", formData),
     onError: (err: AxiosError) => {
       if (axios.isAxiosError(err) && err.response) {
         return err;
@@ -27,7 +28,8 @@ export function useLogin() {
 export function useRegister() {
   const { data, mutate, isSuccess, isError, error, isPending } = useMutation({
     mutationKey: ["register"],
-    mutationFn: (formData: IRegister) => axios.post(API_URL + "/user/register", formData),
+    mutationFn: (formData: IRegister) =>
+      axios.post(API_URL + "/user/register", formData),
     onError: (err: AxiosError) => {
       if (axios.isAxiosError(err) && err.response) {
         return err;
