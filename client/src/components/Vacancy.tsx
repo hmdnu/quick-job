@@ -3,8 +3,8 @@ import { VacancyProps } from "../types";
 
 const Vacancy: React.FC<VacancyProps> = ({ vacancies, onSelect }) => {
   return (
-    <section className="md:flex md:justify-center lg:justify-start h-full my-[20px] gap-[20px]">
-      <div className="grid md:inline-block gap-[20px]">
+    <section className="md:flex justify-center xl:justify-start h-full my-[20px] gap-[20px]">
+      <div className="grid sm:grid-cols-2 md:grid-cols-1 justify-items-center md:inline-block gap-[20px]">
         {vacancies.map((vacancy) => (
           <div
             key={vacancy.key}
@@ -18,10 +18,12 @@ const Vacancy: React.FC<VacancyProps> = ({ vacancies, onSelect }) => {
                   alt="user"
                   className="w-[40px] h-[40px] lg:w-[50px] lg:h-[50px] rounded-full"
                 />
-                <div className="flex lg:grid gap-1 items-center justify-start">
+                <div className="flex sm:grid gap-1 items-center justify-start">
                   <h1 className="text-bulma text-sm-s">{vacancy.username}</h1>
-                  <div className="lg:hidden bg-bulma h-1 w-1 rounded-full"></div>
-                  <h6 className="text-trunks text-xs-r">{vacancy.timestamp} lalu</h6>
+                  <div className="sm:hidden bg-bulma h-1 w-1 rounded-full"></div>
+                  <h6 className="text-trunks text-xs-r">
+                    {vacancy.timestamp} lalu
+                  </h6>
                 </div>
               </div>
               <div className="lg:hidden lg:mt-[20px] h-full inline-block rounded-lg bg-chici-90 bg-opacity-30 px-[6px] pt-[6px]">
@@ -32,12 +34,20 @@ const Vacancy: React.FC<VacancyProps> = ({ vacancies, onSelect }) => {
               </div>
             </div>
             <div className="hidden mt-[20px] lg:inline-block rounded-lg bg-chici-90 bg-opacity-30 px-[6px] pt-[6px]">
-              <h5 className="mb-2 text-sm-s text-chici-90">Kadaluarsa dalam {vacancy.exp}</h5>
+              <h5 className="mb-2 text-sm-s text-chici-90">
+                Kadaluarsa dalam {vacancy.exp}
+              </h5>
             </div>
             <div className="grid mt-[10px] gap-[10px] md:gap-0">
-              <h1 className="text-sm-s md:text-md-s text-bulma">{vacancy.title}</h1>
-              <p className="line-clamp-1 lg:line-clamp-2 text-xs-r md:text-sm-r text-trunks">{vacancy.desc}</p>
-              <span className="text-xs-r md:text-sm-r text-trunks">{vacancy.location}</span>
+              <h1 className="text-sm-s md:text-md-s text-bulma">
+                {vacancy.title}
+              </h1>
+              <p className="line-clamp-1 lg:line-clamp-2 text-xs-r md:text-sm-r text-trunks">
+                {vacancy.desc}
+              </p>
+              <span className="text-xs-r md:text-sm-r text-trunks">
+                {vacancy.location}
+              </span>
             </div>
             <div className="mt-[10px] flex justify-end gap-[5px]">
               <button className="btn-sm-fill rounded-full bg-orange-90 text-white hover:text-orange-90 focus:text-orange-90 text-sm font-semibold">
@@ -66,7 +76,12 @@ const Vacancy: React.FC<VacancyProps> = ({ vacancies, onSelect }) => {
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M5 13l4 4L19 7"
+                  />
                 </svg>
               </button>
             </div>
