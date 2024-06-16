@@ -73,7 +73,6 @@ export default function SignUp() {
         <div>
           <div className="flex flexEnd items-center gap-1">
             <Link to={"/signin"} className="text-red-90 underline text-sm-s">
-            <Link to={"/signin"} className="text-red-90 underline text-sm-s">
               Sign In
             </Link>
             <svg
@@ -128,7 +127,7 @@ export default function SignUp() {
               <p className="text-red-600 text-sm">{errors.email?.message}</p>
             </div>
             <div className="mb-5">
-              <label className="block mb-2 text-sm-r md:text-md-r text-green-90">Your username</label>
+              <label className="block mb-2 text-sm-r md:text-md-r text-green-90">Username</label>
               <input
                 type="text"
                 className="w-full py-[8px] px-[12px] text-xs-r md:text-sm-r rounded-lg border-2 border-goku focus:outline-none"
