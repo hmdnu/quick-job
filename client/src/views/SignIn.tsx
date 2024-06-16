@@ -4,26 +4,62 @@ import { ILogin } from "../types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "../schemas";
+import { useLogin } from "../hooks";
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { errorMessage } from "../constant";
 
-export default function Login() {
+export default function SignIn() {
   const [seePassword, setSeePassword] = useState(false);
+  const [_, setCookies] = useCookies();
+  const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<ILogin>({
     criteriaMode: "all",
     resolver: zodResolver(loginSchema),
   });
 
+  const { data, error, isError, isPending, mutate, isSuccess } = useLogin();
+
   const onSubmit = (formData: ILogin) => {
-    console.log(formData);
+    mutate(formData);
   };
 
   useEffect(() => {
     document.title = "Quick Job | Sign in";
   }, []);
+
+  useEffect(() => {
+    if (isSuccess) {
+      setCookies("access-token", data?.data.access_token);
+      navigate("/");
+      return;
+    }
+
+    const err = (error?.response?.data as { message: string })?.message;
+
+    if (isError) {
+      console.log(err);
+      switch (err) {
+        case errorMessage.USER_NOT_FOUND:
+          setError("email", { message: errorMessage.USER_NOT_FOUND });
+          break;
+
+        case errorMessage.PASSWORD_INVALID:
+          setError("password", { message: errorMessage.PASSWORD_INVALID });
+          break;
+
+        default:
+          setError("root", { message: errorMessage.INTERNAL_SERVER_ERROR });
+          break;
+      }
+    }
+  }, [isSuccess, data, navigate, setCookies, isError, error, errors, setError]);
 
   return (
     <section className="h-dvh grid md:flex justify-center items-center p-5">
@@ -66,6 +102,7 @@ export default function Login() {
 
               <p className="text-red-600 text-sm">{errors.email?.message}</p>
             </div>
+
             <div className="mb-5">
               <label className="block text-sm-r md:text-md-r mb-2 text-sm-r text-green-90">Your password</label>
               <input
@@ -88,8 +125,9 @@ export default function Login() {
               <button
                 type="submit"
                 className="btn-sm-fill bg-green-90 text-white hover:text-green-90 focus:text-green-90 text-sm font-semibold"
+                disabled={isPending}
               >
-                Sign In
+                {isPending ? "Loading" : "Sign in"}
               </button>
             </div>
           </form>
