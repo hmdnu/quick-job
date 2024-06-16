@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import { Home, SignIn, RootLayout } from "./views";
 import CreateVacancy from "./views/CreateVacancy";
+import ErrorPage from "./views/ErrorPage";
 import Riwayat from "./views/Riwayat";
 import SignUp from "./views/SignUp";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUp />,
+  },
+  {
+    path: "/error",
+    element: <ErrorPage />,
   },
 ]);
 

@@ -73,6 +73,7 @@ export default function SignUp() {
         <div>
           <div className="flex flexEnd items-center gap-1">
             <Link to={"/signin"} className="text-red-90 underline text-sm-s">
+            <Link to={"/signin"} className="text-red-90 underline text-sm-s">
               Sign In
             </Link>
             <svg
@@ -97,7 +98,7 @@ export default function SignUp() {
             <div className="mb-5">
               <div className="flex gap-[10px] my-4">
                 <div>
-                  <label className="block mb-2 text-sm-r md:text-md-r text-green-90">First Name</label>
+                  <label className="block mb-2 text-sm-r md:text-md-r text-green-90">Nama Awal</label>
                   <input
                     type="text"
                     className="w-full py-[8px] px-[12px] text-xs-r md:text-sm-r rounded-lg border-2 border-goku focus:outline-none"
@@ -107,7 +108,7 @@ export default function SignUp() {
                   <p className="text-red-600 text-sm">{errors.firstname?.message}</p>
                 </div>
                 <div>
-                  <label className="block mb-2 text-sm-r md:text-md-r text-green-90">Last Name</label>
+                  <label className="block mb-2 text-sm-r md:text-md-r text-green-90">Nama Akhir</label>
                   <input
                     type="text"
                     className="w-full py-[8px] px-[12px] text-xs-r md:text-sm-r rounded-lg border-2 border-goku focus:outline-none"
@@ -117,7 +118,7 @@ export default function SignUp() {
                   <p className="text-red-600 text-sm">{errors.lastname?.message}</p>
                 </div>
               </div>
-              <label className="block mb-2 text-sm-r md:text-md-r text-green-90">Your email</label>
+              <label className="block mb-2 text-sm-r md:text-md-r text-green-90">Email</label>
               <input
                 type="email"
                 className="w-full py-[8px] px-[12px] text-xs-r md:text-sm-r rounded-lg border-2 border-goku focus:outline-none"
@@ -138,7 +139,7 @@ export default function SignUp() {
               <p className="text-red-600 text-sm">{errors.username?.message}</p>
             </div>
             <div className="mb-5">
-              <label className="block text-sm-r md:text-md-r mb-2 text-sm-r text-green-90">Your password</label>
+              <label className="block text-sm-r md:text-md-r mb-2 text-sm-r text-green-90">Kata Sandi</label>
               <input
                 type={seePassword ? "text" : "password"}
                 id="email"
@@ -154,7 +155,7 @@ export default function SignUp() {
             </div>
             <div className="flex justify-between items-center mb-6">
               <a href="/" className="text-red-90 underline text-sm-s md:text-sm-s">
-                Forgot Password?
+                Lupa kata sandi?
               </a>
               <button
                 type="submit"
