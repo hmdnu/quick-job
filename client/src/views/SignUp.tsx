@@ -35,7 +35,7 @@ export default function SignUp() {
         </div>
         <div>
           <div className="flex flexEnd items-center gap-1">
-            <Link to={"/login"} className="text-red-90 underline text-sm-s">
+            <Link to={"/signin"} className="text-red-90 underline text-sm-s">
               Sign In
             </Link>
             <svg
@@ -69,7 +69,7 @@ export default function SignUp() {
               <div className="flex gap-[10px] my-4">
                 <div>
                   <label className="block mb-2 text-sm-r md:text-md-r text-green-90">
-                    First Name
+                    Nama Awal
                   </label>
                   <input
                     type="text"
@@ -85,7 +85,7 @@ export default function SignUp() {
                 </div>
                 <div>
                   <label className="block mb-2 text-sm-r md:text-md-r text-green-90">
-                    Last Name
+                    Nama Akhir
                   </label>
                   <input
                     type="text"
@@ -101,7 +101,7 @@ export default function SignUp() {
                 </div>
               </div>
               <label className="block mb-2 text-sm-r md:text-md-r text-green-90">
-                Your email
+                Email
               </label>
               <input
                 type="email"
@@ -115,7 +115,7 @@ export default function SignUp() {
             </div>
             <div className="mb-5">
               <label className="block text-sm-r md:text-md-r mb-2 text-sm-r text-green-90">
-                Your password
+                Kata Sandi
               </label>
               <input
                 type="password"
@@ -135,7 +135,7 @@ export default function SignUp() {
                 href="/"
                 className="text-red-90 underline text-sm-s md:text-sm-s"
               >
-                Forgot Password?
+                Lupa kata sandi?
               </a>
               <button
                 type="submit"

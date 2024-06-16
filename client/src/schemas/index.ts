@@ -1,14 +1,17 @@
 import { z } from "zod";
 
 export const loginSchema = z.object({
-  email: z.string().min(1, { message: "Email is required" }).email(),
-  password: z.string().min(1, { message: "Password is required" }),
+  email: z.string().min(1, { message: "Email wajib diisi" }).email(),
+  password: z.string().min(1, { message: "Kata sandi wajib diisi" }),
 });
 
 export const registerSchema = z.object({
-  firstname: z.string().min(1, { message: "Firstname is required" }),
-  lastname: z.string().min(1, { message: "Lastname is required" }),
-  email: z.string().email({ message: "Must be an email" }).min(1, { message: "Email is required" }),
-  username: z.string().min(1, { message: "Username is required" }),
-  password: z.string().min(8, { message: "Minimum password is 8 characters" }),
+  firstname: z.string().min(1, { message: "Nama Awal wajib diisi" }),
+  lastname: z.string().min(1, { message: "Nama Akhir wajib diisi" }),
+  email: z
+    .string()
+    .email({ message: "Harus berupa email" })
+    .min(1, { message: "Email wajib diisi" }),
+  username: z.string().min(1, { message: "Username wajib diisi" }),
+  password: z.string().min(8, { message: "Kata sandi minimal 8 karakter" }),
 });
