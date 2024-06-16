@@ -1,5 +1,8 @@
 import Home from "./Home";
 import RootLayout from "./RootLayout";
-import Login from "./SignIn";
+import SignIn from "./SignIn";
+import SignUp from "./SignUp";
+import Riwayat from "./Riwayat";
+import CreateVacancy from "./CreateVacancy";
 
-export { Home, Login, RootLayout };
+export { Home, SignIn, RootLayout, SignUp, Riwayat, CreateVacancy };

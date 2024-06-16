@@ -1,6 +1,21 @@
-/* 
-    this folder is used to save your constant not changing variable
-*/
+export const API_URL = import.meta.env.VITE_API_URL;
+
+export enum errorMessage {
+  USER_NOT_FOUND = "User tidak ditemukan",
+  PASSWORD_INVALID = "Password salah",
+  INTERNAL_SERVER_ERROR = "Ada kesalahan error sistem",
+  EMAIL_REQUIRED = "Email diperlukan",
+  PASSWORD_REQUIRED = "Password diperlukan",
+  FIRSTNAME_REQUIRED = "Nama depan diperlukan",
+  LASTNAME_REQUIRED = "Nama belakang diperlukan",
+  USERNAME_REQUIRED = "Nama pengguna diperlukan",
+  PASSWORD_MIN_LENGTH = "Kata sandi minimal 8 karakter",
+  MUST_BE_EMAIL = "Harus berupa email",
+  PASSWORD_REGEX_NOT_VALID = "Kata sandi harus mengandung setidaknya satu digit, satu huruf besar, dan satu huruf kecil",
+  USERNAME_TAKEN = "username sudah diambil",
+  EMAIL_TAKEN = "email sudah diambil",
+}
+
 export const PROFILE_LINKS = [
   { href: "/riwayat", key: "riwayat", icon: "/img/time.svg", label: "Riwayat" },
   {

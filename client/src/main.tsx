@@ -2,11 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import { Home, Login, RootLayout } from "./views";
+import { Home, SignIn, RootLayout } from "./views";
 import CreateVacancy from "./views/CreateVacancy";
 import ErrorPage from "./views/ErrorPage";
 import Riwayat from "./views/Riwayat";
 import SignUp from "./views/SignUp";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/signin",
-    element: <Login />,
+    element: <SignIn />,
   },
   {
     path: "/signup",
@@ -42,8 +43,12 @@ const router = createBrowserRouter([
   },
 ]);
 
+const queryClient = new QueryClient();
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </React.StrictMode>
 );
