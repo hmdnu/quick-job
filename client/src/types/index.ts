@@ -5,7 +5,10 @@ export interface User {
   username: string;
   email: string;
   password: string;
-  // posts: any;
+  posts: any;
+  isWorker: boolean;
+  job: any;
+  createdAt: string;
 }
 
 export interface IRegister {

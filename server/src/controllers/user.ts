@@ -6,6 +6,7 @@ import { v4 as uuid } from "uuid";
 import { handleHash, handleVerify } from "@/helpers/hash";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { createToken } from "@/libs/jwt";
+import { userValidationMessage } from "@/constant";
 
 export async function handleLogin(c: Context) {
   const userData: User = await c.req.json();
@@ -16,19 +17,17 @@ export async function handleLogin(c: Context) {
       where: {
         email: userData.email,
       },
+      include: {
+        posts: true,
+      },
     });
 
     // verify password
     const verifiedPass = await handleVerify(userData.password, user?.password);
 
     // auth
-    // to check if user undefined
-    if (!user) {
-      return c.json({ message: "email not found" }, http.NOT_FOUND);
-    }
-
     if (!verifiedPass) {
-      return c.json({ message: "Password invalid" }, http.UNAUTHORIZED);
+      return c.json({ message: userValidationMessage.PASSWORD_INVALID }, http.UNAUTHORIZED);
     }
 
     const token = await createToken({ id: user?.id, email: user?.email, username: user?.username });
@@ -36,6 +35,9 @@ export async function handleLogin(c: Context) {
     return c.json({ user, access_token: token });
   } catch (error) {
     if (error instanceof PrismaClientKnownRequestError) {
+      if (error.code === "P2025") {
+        return c.json({ message: userValidationMessage.USER_NOT_FOUND }, http.NOT_FOUND);
+      }
       return c.json({ message: error.message }, http.INTERNAL_SERVER_ERROR);
     }
   }
@@ -66,7 +68,7 @@ export async function handleRegister(c: Context) {
       switch (error.code) {
         case "P2002":
           const errMsg = (error.meta?.target as string).split("_")[1];
-          return c.json({ message: `duplicate ${errMsg}` }, http.BAD_REQUEST);
+          return c.json({ message: `${errMsg} ${userValidationMessage.DUPLICATE}` }, http.BAD_REQUEST);
 
         default:
           return c.json({ message: "internal server error" }, http.INTERNAL_SERVER_ERROR);

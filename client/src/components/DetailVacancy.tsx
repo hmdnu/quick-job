@@ -44,13 +44,15 @@ const DetailVacancy: React.FC<VacancyDetailProps> = ({ vacancy }) => {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="currentColor"
               className="size-6"
             >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
+
                 d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
               />
               <path
@@ -68,7 +70,7 @@ const DetailVacancy: React.FC<VacancyDetailProps> = ({ vacancy }) => {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="currentColor"
               className="size-6"
             >
@@ -90,7 +92,7 @@ const DetailVacancy: React.FC<VacancyDetailProps> = ({ vacancy }) => {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             stroke="currentColor"
             className="md:hidden size-6"
           >
@@ -110,6 +112,7 @@ const DetailVacancy: React.FC<VacancyDetailProps> = ({ vacancy }) => {
             viewBox="0 0 24 24"
             stroke="currentColor"
           >
+
             <path
               strokeLinecap="round"
               strokeLinejoin="round"

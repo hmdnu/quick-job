@@ -12,6 +12,11 @@ export default function Home() {
   const selectedVacancyDetails =
     DUMMY_VACANCY.find((vacancy) => vacancy.key === selectedVacancy) || null;
 
+export default function Home() {
+  useEffect(() => {
+    document.title = "Quick Job | Home";
+  }, []);
+
   return (
     <>
       {/* md:flex md:justify-center lg:justify-start h-full xl:ml-[120px] mx-[20px] my-[20px] gap-[20px] */}

@@ -7,9 +7,7 @@ const CreateVacancy = () => {
       <form className="max-w-screen-md md:flex justify-between gap-5">
         <div className="grid mb-5 w-full h-full gap-[10px]">
           <div>
-            <label className="block mb-2 text-sm-s md:text-md-s text-green-90">
-              Judul
-            </label>
+            <label className="block mb-2 text-sm-s md:text-md-s text-green-90">Judul</label>
             <input
               type="text"
               id="judul"
@@ -19,9 +17,7 @@ const CreateVacancy = () => {
             />
           </div>
           <div>
-            <label className="block mb-2 text-sm-s md:text-md-s text-green-90">
-              Deskripsi Pekerjaan
-            </label>
+            <label className="block mb-2 text-sm-s md:text-md-s text-green-90">Deskripsi Pekerjaan</label>
             <textarea
               name=""
               id="desc"
@@ -64,17 +60,14 @@ const CreateVacancy = () => {
         </div>
         <div className="grid mb-5 w-full gap-[10px]">
           <div>
-            <label className="block mb-2 text-sm-s md:text-md-s text-green-90">
-              Mau nunggu sampai kapan ?
-            </label>
+            <label className="block mb-2 text-sm-s md:text-md-s text-green-90">Mau nunggu sampai kapan ?</label>
             <div className="flex flex-wrap gap-2">
-              {TIME_BUTTON.map((time) => (
+              {TIME_BUTTON.map((time, i) => (
                 <button
+                  key={i}
                   type="submit"
                   className={`btn-xs-secondary lg:btn-sm-secondary gap-2 ${
-                    time.key % 2 == 0
-                      ? "bg-green-90 text-green-90"
-                      : "bg-orange-90 text-orange-90"
+                    time.key % 2 == 0 ? "bg-green-90 text-green-90" : "bg-orange-90 text-orange-90"
                   } text-sm font-bold`}
                 >
                   {time.label}
@@ -82,14 +75,11 @@ const CreateVacancy = () => {
               ))}
             </div>
             <p className="mt-[5px] text-2xs-r text-trunks">
-              * setelah waktu yang dipilih habis, lowongan yang anda buat akan
-              otomatis menghilang.
+              * setelah waktu yang dipilih habis, lowongan yang anda buat akan otomatis menghilang.
             </p>
           </div>
           <div>
-            <label className="block mb-2 text-sm-s md:text-md-s text-green-90">
-              Mau bayar berapa bro ?
-            </label>
+            <label className="block mb-2 text-sm-s md:text-md-s text-green-90">Mau bayar berapa bro ?</label>
             <input
               type="text"
               id="sallary"
@@ -99,9 +89,7 @@ const CreateVacancy = () => {
             />
           </div>
           <div>
-            <label className="block mb-2 text-sm-s md:text-md-s text-green-90">
-              Metode Pembayaran
-            </label>
+            <label className="block mb-2 text-sm-s md:text-md-s text-green-90">Metode Pembayaran</label>
             <div className="flex gap-[10px]">
               <button className="flex flexCenter border-none rounded-lg px-3 py-1 bg-green-90 text-sm-s !font-semibold text-white gap-2">
                 <svg
