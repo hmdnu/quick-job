@@ -49,7 +49,7 @@ export default function Navbar() {
   }, [user, data]);
 
   return (
-    <nav className="fixed w-full top-0 bg-navbar bg-center">
+    <nav className="fixed z-30 w-full top-0 bg-navbar bg-center">
       <div className="static max-w-screen-xl flex flex-row items-center gap-[20px] justify-between md:justify-start mx-auto p-4">
         {/* Logo */}
         <Link to={"/"} className="flex md:grid justify-items-center basis-20 items-center space-x-3">
@@ -57,7 +57,7 @@ export default function Navbar() {
           <span className="text-white text-md-s">QuickJob</span>
         </Link>
 
-        <div className="hidden md:flex flex-row justify-center gap-[20px] basis-3/4">
+        <div className="hidden lg:flex flex-row justify-center gap-[20px] basis-3/4">
           {/* Creat Vacancy Button */}
           <Link
             to={"/create-vacancy"}
@@ -72,7 +72,11 @@ export default function Navbar() {
               stroke="currentColor"
               className="size-6"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 4.5v15m7.5-7.5h-15"
+              />
             </svg>
             Buat Lowongan
           </Link>

@@ -1,13 +1,14 @@
-import { DUMMY_VACANCY } from "../constant";
-import DetailVacancy from "./DetailVacancy";
+import React from "react";
+import { VacancyProps } from "../types";
 
-const Vacancy = () => {
+const Vacancy: React.FC<VacancyProps> = ({ vacancies, onSelect }) => {
   return (
-    <section className="mt-[120px] md:flex md:justify-center lg:justify-start h-full xl:ml-[120px] mx-[20px] my-[20px] gap-[20px]">
+    <section className="md:flex md:justify-center lg:justify-start h-full my-[20px] gap-[20px]">
       <div className="grid md:inline-block gap-[20px]">
-        {DUMMY_VACANCY.map((vacancy, i) => (
+        {vacancies.map((vacancy) => (
           <div
-            key={i}
+            key={vacancy.key}
+            onClick={() => onSelect(vacancy.key)}
             className="cursor-pointer md:mb-[20px] max-w-sm p-4 gap-[10px] bg-white border border-gray-200 rounded-lg shadow"
           >
             <div className="flex justify-between">
@@ -72,7 +73,6 @@ const Vacancy = () => {
           </div>
         ))}
       </div>
-      <DetailVacancy />
     </section>
   );
 };

@@ -41,7 +41,9 @@ const Riwayat = () => {
         </button>
         <button
           onClick={() => setSelectedSegment(2)}
-          className="btn-md-fill focus:bg-white focus:text-green-90"
+          className={`btn-md-fill focus:bg-white focus:text-green-90
+            ${selectedSegment === 2 ? "btn-active" : ""}
+            `}
         >
           Selesai
         </button>
