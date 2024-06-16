@@ -1,12 +1,16 @@
-import { DUMMY_VACANCY } from "../constant";
-import DetailVacancy from "./DetailVacancy";
+import React from "react";
+import { VacancyProps } from "../types";
 
-const Vacancy = () => {
+const Vacancy: React.FC<VacancyProps> = ({ vacancies, onSelect }) => {
   return (
-    <section className="mt-[120px] md:flex md:justify-center lg:justify-start h-full xl:ml-[120px] mx-[20px] my-[20px] gap-[20px]">
+    <section className="md:flex md:justify-center lg:justify-start h-full my-[20px] gap-[20px]">
       <div className="grid md:inline-block gap-[20px]">
-        {DUMMY_VACANCY.map((vacancy) => (
-          <div className="cursor-pointer md:mb-[20px] max-w-sm p-4 gap-[10px] bg-white border border-gray-200 rounded-lg shadow">
+        {vacancies.map((vacancy) => (
+          <div
+            key={vacancy.key}
+            onClick={() => onSelect(vacancy.key)}
+            className="cursor-pointer md:mb-[20px] max-w-sm p-4 gap-[10px] bg-white border border-gray-200 rounded-lg shadow"
+          >
             <div className="flex justify-between">
               <div className="flex flexCenter gap-[10px]">
                 <img
@@ -57,8 +61,8 @@ const Vacancy = () => {
                   className="lg:hidden size-6"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z"
                   />
                 </svg>
@@ -73,8 +77,8 @@ const Vacancy = () => {
                   stroke="currentColor"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     stroke-width="2"
                     d="M5 13l4 4L19 7"
                   />
@@ -84,7 +88,6 @@ const Vacancy = () => {
           </div>
         ))}
       </div>
-      <DetailVacancy />
     </section>
   );
 };

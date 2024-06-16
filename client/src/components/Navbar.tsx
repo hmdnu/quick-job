@@ -2,7 +2,7 @@ import { PROFILE_LINKS } from "../constant";
 
 const Navbar = () => {
   return (
-    <nav className="fixed w-full top-0 bg-navbar bg-center">
+    <nav className="fixed z-30 w-full top-0 bg-navbar bg-center">
       <div className="static max-w-screen-xl flex flex-row items-center gap-[20px] justify-between md:justify-start mx-auto p-4">
         {/* Logo */}
         <a
@@ -17,7 +17,7 @@ const Navbar = () => {
           <span className="text-white text-md-s">QuickJob</span>
         </a>
 
-        <div className="hidden md:flex flex-row justify-center gap-[20px] basis-3/4">
+        <div className="hidden lg:flex flex-row justify-center gap-[20px] basis-3/4">
           {/* Creat Vacancy Button */}
           <button
             type="button"
@@ -32,8 +32,8 @@ const Navbar = () => {
               className="size-6"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 d="M12 4.5v15m7.5-7.5h-15"
               />
             </svg>
@@ -53,8 +53,8 @@ const Navbar = () => {
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     stroke-width="2"
                     d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
                   />
