@@ -17,6 +17,7 @@ export default function Navbar() {
   const [cookies, setCookie, removeCookie] = useCookies(["access-token"]);
   const [user, setUser] = useState<User>();
   const [dateCreated, setDateCreated] = useState("");
+  const [navMobile, setNavMobile] = useState(false);
 
   const { data, error, isError, isPending, mutate } = useGetUser();
 
@@ -26,6 +27,16 @@ export default function Navbar() {
     if (isConfirm) {
       removeCookie("access-token");
     }
+  }
+
+  function handleOpenNavMobile() {
+    setNavMobile((prev) => !prev);
+    document.querySelector("body")?.classList.add("overflow-hidden");
+  }
+
+  function handleCloseNavMobile() {
+    setNavMobile((prev) => !prev);
+    document.querySelector("body")?.classList.remove("overflow-hidden");
   }
 
   useEffect(() => {
@@ -112,7 +123,7 @@ export default function Navbar() {
               <input
                 type="text"
                 id="search-navbar"
-                className="text-md-s block w-full px-4 py-2 ps-10 text-sm text-trunk border-none rounded-lg bg-gohan focus:outline-none"
+                className="text-md-r !font-semibold block w-full px-4 py-2 ps-10 text-sm text-trunk border-none rounded-lg bg-gohan focus:outline-none"
                 placeholder="Cari apa hayo..."
               />
             </div>
@@ -140,13 +151,19 @@ export default function Navbar() {
           <ul className="h-full gap-3 lg:grid">
             <li className="flex flex-row items-center gap-[12px] cursor-pointer">
               <img src="/img/time.svg" alt="time" />
-              <Link to={"/riwayat"} className="text-sm-r">
+              <Link
+                to={"/riwayat"}
+                className="text-sm-r hover:text-sm-s focus:text-sm-s"
+              >
                 Riwayat
               </Link>
             </li>
             <li className="flex flex-row items-center gap-[12px] cursor-pointer">
               <img src="/img/log-out.svg" alt="logout" />
-              <button onClick={handleLogout} className="text-sm-r">
+              <button
+                onClick={handleLogout}
+                className="text-sm-r hover:text-sm-s focus:text-sm-s"
+              >
                 Log out
               </button>
             </li>
@@ -157,7 +174,34 @@ export default function Navbar() {
             src="/img/user.jpg"
             alt="user"
             className="w-[40px] h-[40px] rounded-full"
+            onClick={handleOpenNavMobile}
           />
+          {navMobile && (
+            <div
+              id="navMobile"
+              onClick={handleCloseNavMobile}
+              className="bg-[rgba(0,0,0,.5)] w-full h-screen fixed z-50 top-0 left-0 overflow-hidden"
+            >
+              <div className="gap-[30px] absolute bg-white p-3 w-[100px] right-5 lg:right-36 top-16 rounded-lg ">
+                <li className="flex flex-row items-center gap-[12px] cursor-pointer">
+                  <Link
+                    to={"/riwayat"}
+                    className="text-sm-r hover:text-sm-s focus:text-sm-s"
+                  >
+                    Riwayat
+                  </Link>
+                </li>
+                <li className="flex flex-row items-center gap-[12px] cursor-pointer">
+                  <button
+                    onClick={handleLogout}
+                    className="text-sm-r hover:text-sm-s focus:text-sm-s"
+                  >
+                    Log out
+                  </button>
+                </li>
+              </div>
+            </div>
+          )}
         </button>
       </div>
     </nav>
