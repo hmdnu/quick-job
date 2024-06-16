@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
-import { useCookies } from "react-cookie";
 import { jwtDecode } from "jwt-decode";
+import moment from "moment";
 import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
+import { Link } from "react-router-dom";
 import { useGetUser } from "../hooks/user";
 import { User } from "../types";
-import moment from "moment";
 
 interface Token {
   id: string;
@@ -50,14 +50,21 @@ export default function Navbar() {
 
   return (
     <nav className="fixed z-30 w-full top-0 bg-navbar bg-center">
-      <div className="static max-w-screen-xl flex flex-row items-center gap-[20px] justify-between md:justify-start mx-auto p-4">
+      <div className="static max-w-screen-xl flex flex-row items-center gap-[20px] justify-between lg:justify-start mx-auto p-4">
         {/* Logo */}
-        <Link to={"/"} className="flex md:grid justify-items-center basis-20 items-center space-x-3">
-          <img src="/img/logo-quickjob.png" className="h-[40px]" alt="Flowbite Logo" />
+        <Link
+          to={"/"}
+          className="flex md:grid justify-items-center basis-20 items-center space-x-3"
+        >
+          <img
+            src="/img/logo-quickjob.png"
+            className="h-[40px]"
+            alt="Flowbite Logo"
+          />
           <span className="text-white text-md-s">QuickJob</span>
         </Link>
 
-        <div className="hidden lg:flex flex-row justify-center gap-[20px] basis-3/4">
+        <div className="hidden md:flex flex-row justify-center gap-[20px] basis-3/4">
           {/* Creat Vacancy Button */}
           <Link
             to={"/create-vacancy"}
@@ -82,7 +89,7 @@ export default function Navbar() {
           </Link>
 
           {/* Search Bar */}
-          <div className="grid xl:basis-3/5">
+          <div className="grid md:basis-3/5">
             <div className="relative hidden md:block">
               <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                 <svg
@@ -113,14 +120,21 @@ export default function Navbar() {
         </div>
 
         {/* Profile */}
-        <div className="hidden lg:grid absolute h-[274px] w-[268px] gap-[20px] rounded-lg bg-white border-2 border-trunks border-opacity-10 p-[15px] top-[24px] right-[20px]">
+        <div className="hidden xl:grid absolute h-[274px] w-[268px] gap-[20px] rounded-lg bg-white border-2 border-trunks border-opacity-10 p-[15px] top-[24px] right-[20px]">
           <div className="w-full bg-green-90 flex justify-center py-2 rounded-lg">
-            <img src="/img/user.jpg" alt="user" className="w-[50px] h-[50px] rounded-full" />
+            <img
+              src="/img/user.jpg"
+              alt="user"
+              className="w-[50px] h-[50px] rounded-full"
+            />
           </div>
           <div className="flex flex-col items-center">
             <h1 className="text-bulma text-md-s">{`${
-              user?.firstname.charAt(0).toUpperCase() + user?.firstname.slice(1)!
-            } ${user?.lastname.charAt(0).toUpperCase() + user?.lastname.slice(1)!}`}</h1>
+              user?.firstname.charAt(0).toUpperCase() +
+              user?.firstname.slice(1)!
+            } ${
+              user?.lastname.charAt(0).toUpperCase() + user?.lastname.slice(1)!
+            }`}</h1>
             <h6 className="text-trunks text-xs-r">Sejak {dateCreated}</h6>
           </div>
           <ul className="h-full gap-3 lg:grid">
@@ -138,8 +152,12 @@ export default function Navbar() {
             </li>
           </ul>
         </div>
-        <button>
-          <img src="/img/user.jpg" alt="user" className="w-[40px] h-[40px] rounded-full" />
+        <button className="flex xl:hidden">
+          <img
+            src="/img/user.jpg"
+            alt="user"
+            className="w-[40px] h-[40px] rounded-full"
+          />
         </button>
       </div>
     </nav>
