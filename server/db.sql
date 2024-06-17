@@ -7,8 +7,10 @@ select * from user;
 
 select * from post; 
 
+update post set status = "ONGOING" where status = "CANCELED";
+
 delete from user;
-delete from post;
+delete from post where id = "9cabb3ea-3555-4ffb-882b-506d6b11f398";
 
 desc post;
 

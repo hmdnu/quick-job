@@ -12,8 +12,22 @@ export enum errorMessage {
   PASSWORD_MIN_LENGTH = "Kata sandi minimal 8 karakter",
   MUST_BE_EMAIL = "Harus berupa email",
   PASSWORD_REGEX_NOT_VALID = "Kata sandi harus mengandung setidaknya satu digit, satu huruf besar, dan satu huruf kecil",
-  USERNAME_TAKEN = "username sudah diambil",
-  EMAIL_TAKEN = "email sudah diambil",
+  USERNAME_TAKEN = "Username sudah diambil",
+  EMAIL_TAKEN = "Email sudah diambil",
+  TITLE_REQUIRED = "Judul diperlukan",
+  PRICE_REQUIRED = "Harga diperlukan",
+  DEADLINE_REQUIRED = "Deadline diperlukan",
+}
+
+export enum PAYMENT {
+  CASH = "Cash",
+  TRANSFER = "Transfer",
+}
+
+export enum STATUS {
+  ONGOING = "Sedang berjalan",
+  DONE = "Selesai",
+  CANCELED = "Dibatalkan",
 }
 
 export const PROFILE_LINKS = [
@@ -64,6 +78,15 @@ export const TIME_BUTTON = [
   { key: 2, label: "20 Menit" },
   { key: 3, label: "30 Menit" },
   { key: 4, label: "45 Menit" },
-  { key: 5, label: "1 Jam" },
-  { key: 6, label: "Sampai Lowongan Dihapus" },
+  { key: 5, label: "60 menit" },
+  { key: 6, label: "Sampai lowongan dihapus" },
+];
+
+export const PAYMENT_METHOD = [
+  {
+    label: "Tunai",
+  },
+  {
+    label: "Transfer",
+  },
 ];

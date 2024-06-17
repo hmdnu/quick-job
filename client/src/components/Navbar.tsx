@@ -3,15 +3,9 @@ import { useCookies } from "react-cookie";
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import { useGetUser } from "../hooks/user";
-import { User } from "../types";
+import { Token, User } from "../types";
 import moment from "moment";
-
-interface Token {
-  id: string;
-  username: string;
-  email: string;
-  exp: number;
-}
+import formatName from "../helpers/formatName";
 
 export default function Navbar() {
   const [cookies, setCookie, removeCookie] = useCookies(["access-token"]);
@@ -114,9 +108,10 @@ export default function Navbar() {
             <img src="/img/user.jpg" alt="user" className="w-[50px] h-[50px] rounded-full" />
           </div>
           <div className="flex flex-col items-center">
-            <h1 className="text-bulma text-md-s">{`${
-              user?.firstname.charAt(0).toUpperCase() + user?.firstname.slice(1)!
-            } ${user?.lastname.charAt(0).toUpperCase() + user?.lastname.slice(1)!}`}</h1>
+            <h1 className="text-bulma text-md-s">
+              {`${formatName(user?.firstname || "")} 
+            ${formatName(user?.lastname || "")}`}
+            </h1>
             <h6 className="text-trunks text-xs-r">Sejak {dateCreated}</h6>
           </div>
           <ul className="h-full gap-3 lg:grid">

@@ -39,7 +39,7 @@ model Post{
   creator User? @relation(fields: [creatorId], references: [id])
   worker Job?
   status POST_STATUS @default(ONGOING)
-  
+  address String
 }
 
 model Job {
