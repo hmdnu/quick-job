@@ -4,14 +4,8 @@ import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { Link } from "react-router-dom";
 import { useGetUser } from "../hooks/user";
-import { User } from "../types";
-
-interface Token {
-  id: string;
-  username: string;
-  email: string;
-  exp: number;
-}
+import { Token, User } from "../types";
+import formatName from "../helpers/formatName";
 
 export default function Navbar() {
   const [cookies, setCookie, removeCookie] = useCookies(["access-token"]);
@@ -63,15 +57,8 @@ export default function Navbar() {
     <nav className="fixed z-30 w-full top-0 bg-navbar bg-center">
       <div className="static max-w-screen-xl flex flex-row items-center gap-[20px] justify-between lg:justify-start mx-auto p-4">
         {/* Logo */}
-        <Link
-          to={"/"}
-          className="flex md:grid justify-items-center basis-20 items-center space-x-3"
-        >
-          <img
-            src="/img/logo-quickjob.png"
-            className="h-[40px]"
-            alt="Flowbite Logo"
-          />
+        <Link to={"/"} className="flex md:grid justify-items-center basis-20 items-center space-x-3">
+          <img src="/img/logo-quickjob.png" className="h-[40px]" alt="Flowbite Logo" />
           <span className="text-white text-md-s">QuickJob</span>
         </Link>
 
@@ -90,11 +77,7 @@ export default function Navbar() {
               stroke="currentColor"
               className="size-6"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 4.5v15m7.5-7.5h-15"
-              />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
             Buat Lowongan
           </Link>
@@ -133,37 +116,25 @@ export default function Navbar() {
         {/* Profile */}
         <div className="hidden xl:grid absolute h-[274px] w-[268px] gap-[20px] rounded-lg bg-white border-2 border-trunks border-opacity-10 p-[15px] top-[24px] right-[20px]">
           <div className="w-full bg-green-90 flex justify-center py-2 rounded-lg">
-            <img
-              src="/img/user.jpg"
-              alt="user"
-              className="w-[50px] h-[50px] rounded-full"
-            />
+            <img src="/img/user.jpg" alt="user" className="w-[50px] h-[50px] rounded-full" />
           </div>
           <div className="flex flex-col items-center">
-            <h1 className="text-bulma text-md-s">{`${
-              user?.firstname.charAt(0).toUpperCase() +
-              user?.firstname.slice(1)!
-            } ${
-              user?.lastname.charAt(0).toUpperCase() + user?.lastname.slice(1)!
-            }`}</h1>
+            <h1 className="text-bulma text-md-s">
+              {`${formatName(user?.firstname || "")} 
+            ${formatName(user?.lastname || "")}`}
+            </h1>
             <h6 className="text-trunks text-xs-r">Sejak {dateCreated}</h6>
           </div>
           <ul className="h-full gap-3 lg:grid">
             <li className="flex flex-row items-center gap-[12px] cursor-pointer">
               <img src="/img/time.svg" alt="time" />
-              <Link
-                to={"/riwayat"}
-                className="text-sm-r hover:text-sm-s focus:text-sm-s"
-              >
+              <Link to={"/riwayat"} className="text-sm-r hover:text-sm-s focus:text-sm-s">
                 Riwayat
               </Link>
             </li>
             <li className="flex flex-row items-center gap-[12px] cursor-pointer">
               <img src="/img/log-out.svg" alt="logout" />
-              <button
-                onClick={handleLogout}
-                className="text-sm-r hover:text-sm-s focus:text-sm-s"
-              >
+              <button onClick={handleLogout} className="text-sm-r hover:text-sm-s focus:text-sm-s">
                 Log out
               </button>
             </li>
@@ -184,18 +155,12 @@ export default function Navbar() {
             >
               <div className="gap-[30px] absolute bg-white p-3 w-[100px] right-5 lg:right-36 top-16 rounded-lg ">
                 <li className="flex flex-row items-center gap-[12px] cursor-pointer">
-                  <Link
-                    to={"/riwayat"}
-                    className="text-sm-r hover:text-sm-s focus:text-sm-s"
-                  >
+                  <Link to={"/riwayat"} className="text-sm-r hover:text-sm-s focus:text-sm-s">
                     Riwayat
                   </Link>
                 </li>
                 <li className="flex flex-row items-center gap-[12px] cursor-pointer">
-                  <button
-                    onClick={handleLogout}
-                    className="text-sm-r hover:text-sm-s focus:text-sm-s"
-                  >
+                  <button onClick={handleLogout} className="text-sm-r hover:text-sm-s focus:text-sm-s">
                     Log out
                   </button>
                 </li>

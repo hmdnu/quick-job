@@ -24,6 +24,7 @@ export interface Post {
   creator: User;
   worker?: Job;
   status: STATUS;
+  address: string;
 }
 
 export interface Job {

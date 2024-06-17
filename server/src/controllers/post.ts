@@ -17,6 +17,7 @@ export async function handleCreatePost(c: Context) {
         deadline: postData.deadline,
         payment: postData.payment as any,
         price: postData.price,
+        address: postData.address,
         creator: {
           connect: {
             id: postData.creatorId,
@@ -85,7 +86,6 @@ export async function handleGetPost(c: Context) {
 export async function hanldeUpdatStatusPost(c: Context) {
   const postData: Post = await c.req.json();
   const postId = c.req.param("postId");
-
   try {
     const post = await prisma.post.update({
       where: {
@@ -98,6 +98,7 @@ export async function hanldeUpdatStatusPost(c: Context) {
 
     return c.json({ post, message: "post updated" }, http.OK);
   } catch (error) {
+    console.log(error);
     if (error instanceof PrismaClientKnownRequestError) {
       return c.json({ message: error.message }, http.INTERNAL_SERVER_ERROR);
     }

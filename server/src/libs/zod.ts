@@ -61,6 +61,7 @@ export const PostValidator = z.object({
   payment: z.enum(["CASH", "TRANSFER"], {
     required_error: postValidationMessage.PAYMENT_REQUIRED,
   }),
+  address: z.string(),
 });
 
 export const QueryValidator = z.object({

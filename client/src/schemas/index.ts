@@ -18,3 +18,15 @@ export const registerSchema = z.object({
       message: errorMessage.PASSWORD_REGEX_NOT_VALID,
     }),
 });
+
+export const postSchema = z.object({
+  title: z.string().min(1, { message: errorMessage.TITLE_REQUIRED }),
+  desc: z.string().optional(),
+  price: z.coerce
+    .number()
+    .min(1, { message: errorMessage.PRICE_REQUIRED })
+    .refine((numb) => !isNaN(numb) && numb > 0),
+  deadline: z.string({ required_error: "Deadline diperlukan" }).min(1, { message: errorMessage.DEADLINE_REQUIRED }),
+  payment: z.string({ required_error: "Pembayaran diperlukan" }).min(1, { message: "Pembayaran diperlukan" }),
+  address: z.string().min(1, { message: "Alamat diperlukan" }),
+});
