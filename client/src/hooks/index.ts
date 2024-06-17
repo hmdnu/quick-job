@@ -1,3 +1,4 @@
-import { useLogin, useRegister } from "./user";
+import { useAuth, useGetUser } from "./user";
+import { useCreatePost, useDeletePost, useGetPosts, useUpdatePost } from "./post";
 
-export { useLogin, useRegister };
+export { useAuth, useGetUser, useCreatePost, useDeletePost, useGetPosts, useUpdatePost };

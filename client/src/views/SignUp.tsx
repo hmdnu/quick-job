@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { registerSchema } from "../schemas";
-import { IRegister } from "../types";
-import { useRegister } from "../hooks";
+import { Register } from "../types";
 import { errorMessage } from "../constant";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/user";
 
 export default function SignUp() {
   const {
@@ -14,16 +14,16 @@ export default function SignUp() {
     handleSubmit,
     formState: { errors },
     setError,
-  } = useForm<IRegister>({
+  } = useForm<Register>({
     criteriaMode: "all",
     resolver: zodResolver(registerSchema),
   });
 
   const [seePassword, setSeePassword] = useState(false);
-  const { data, error, isError, isPending, isSuccess, mutate } = useRegister();
+  const { data, error, isError, isPending, isSuccess, mutate } = useAuth({ type: "register" });
   const navigate = useNavigate();
 
-  const onSubmit = (formData: IRegister) => {
+  const onSubmit = (formData: Register) => {
     mutate(formData);
   };
 

@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { loginSchema } from "../schemas";
-import { useLogin } from "../hooks";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { errorMessage } from "../constant";
-import { ILogin } from "../types";
+import { Login } from "../types";
+import { useAuth } from "../hooks/user";
 
 export default function SignIn() {
   const [seePassword, setSeePassword] = useState(false);
@@ -19,14 +19,14 @@ export default function SignIn() {
     handleSubmit,
     formState: { errors },
     setError,
-  } = useForm<ILogin>({
+  } = useForm<Login>({
     criteriaMode: "all",
     resolver: zodResolver(loginSchema),
   });
 
-  const { data, error, isError, isPending, mutate, isSuccess } = useLogin();
+  const { data, error, isError, isPending, mutate, isSuccess } = useAuth({ type: "login" });
 
-  const onSubmit = (formData: ILogin) => {
+  const onSubmit = (formData: Login) => {
     mutate(formData);
   };
 

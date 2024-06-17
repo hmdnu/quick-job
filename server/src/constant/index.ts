@@ -23,12 +23,12 @@ export enum postValidationMessage {
 }
 
 export enum STATUS {
-  ONGOING = "ongoing",
-  DONE = "done",
-  CANCELED = "candeled",
+  ONGOING = "ONGOING",
+  DONE = "DONE",
+  CANCELED = "CANCELED",
 }
 
 export enum PAYMENT {
-  CASH = "cash",
-  TRANSFER = "transfer",
+  CASH = "CASH",
+  TRANSFER = "TRANSFER",
 }
