@@ -97,7 +97,7 @@ const Vacancy: React.FC<VacancyProps> = ({ vacancies, onSelect }) => {
                     d="M5 13l4 4L19 7"
                   />
                 </svg>
-              </button>{" "}
+              </button>
               {confirmation && (
                 <div
                   onClick={handleCloseConfirmation}

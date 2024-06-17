@@ -106,4 +106,12 @@ body {
   .btn-active {
     @apply bg-white text-green-90;
   }
+
+  .translateOpen {
+    @apply translate-y-0 transition-transform duration-300 ease-in-out;
+  }
+
+  .translateClose {
+    @apply translate-y-[15rem] xl:translate-y-[15rem] transition-transform duration-300 ease-in-out;
+  }
 }
