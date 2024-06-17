@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 import { API_URL } from "../constant";
-import { NewPost, Post } from "../types";
+import { NewPost } from "../types";
 
 export function useGetPosts() {
   const { data, isError, isPending, error, status, isSuccess } = useQuery({

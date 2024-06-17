@@ -1,29 +1,25 @@
 import { useEffect, useState } from "react";
 import { useGetPosts, useUpdatePost } from "../hooks/post";
-import DetailVacancy from "./DetailVacancy";
 import { Post } from "../types";
 import formatCurrency from "../helpers/formatCurrency";
 import formatName from "../helpers/formatName";
 import moment from "moment";
 import "moment/dist/locale/id";
 import { sortPostsByDate } from "../helpers";
-import axios from "axios";
-
-enum POST_STATUS {
-  DONE = "DONE",
-  ONGOING = "ONGOING",
-  CANCELED = "CANCELED",
-}
+import { useStoreJobDetails, useStoreModalConfirmation } from "../hooks/zustand";
+import { POST_STATUS } from "../constant";
 
 export default function Vacancy() {
   const getPosts = useGetPosts();
   const updatePosts = useUpdatePost();
   const [posts, setPosts] = useState<Post[]>([]);
   const [postToUpdate, setPostToUpdate] = useState<Post[]>([]);
+  const { isShowJobDetails } = useStoreJobDetails();
+  const { closeModal, isOpen, openModal } = useStoreModalConfirmation();
 
   moment.locale("id");
 
-  // filter post by canceled status
+  // Filter posts by canceled status
   useEffect(() => {
     const overduePosts = posts?.filter((post) => {
       return moment().isAfter(post.deadline) && (post.status as string) !== POST_STATUS.CANCELED;
@@ -52,7 +48,7 @@ export default function Vacancy() {
     return () => clearInterval(interval);
   }, [updatePosts, posts, postToUpdate]);
 
-  // display posts
+  // Display posts
   useEffect(() => {
     if (getPosts.isSuccess) {
       setPosts(sortPostsByDate(getPosts.data?.data));
@@ -76,14 +72,16 @@ export default function Vacancy() {
             .map((post) => (
               <div
                 key={post.id}
+                onClick={() => isShowJobDetails(post)}
                 className="cursor-pointer md:mb-[20px] max-w-sm p-4 gap-[10px] bg-white border border-gray-200 rounded-lg shadow"
               >
                 <div className="flex justify-between">
                   <div className="flex flexCenter gap-[10px]">
                     <img src={""} alt="user" className="w-[40px] h-[40px] lg:w-[50px] lg:h-[50px] rounded-full" />
                     <div className="flex lg:grid gap-1 items-center justify-start">
-                      <h1 className="text-bulma text-sm-s">{`
-                      ${formatName(post.creator.firstname)} ${formatName(post.creator.lastname)}`}</h1>
+                      <h1 className="text-bulma text-sm-s">{`${formatName(post.creator.firstname)} ${formatName(
+                        post.creator.lastname
+                      )}`}</h1>
                       <div className="lg:hidden bg-bulma h-1 w-1 rounded-full"></div>
                       <h6 className="text-trunks text-xs-r">{moment(post.createdAt).fromNow()}</h6>
                     </div>
@@ -125,7 +123,10 @@ export default function Vacancy() {
                       />
                     </svg>
                   </button>
-                  <button className="btn-sm-fill bg-green-90 text-white hover:text-green-90 focus:text-green-90 text-sm font-semibold">
+                  <button
+                    onClick={openModal}
+                    className="btn-sm-fill bg-green-90 text-white hover:text-green-90 focus:text-green-90 text-sm font-semibold"
+                  >
                     <span className="hidden lg:inline">Kerjakan</span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -137,12 +138,50 @@ export default function Vacancy() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                     </svg>
                   </button>
+                  {isOpen && (
+                    <div
+                      onClick={closeModal}
+                      className="flex justify-center mx-auto items-center bg-[rgba(0,0,0,.5)] w-full h-screen fixed z-50 top-0 left-0 overflow-hidden"
+                    >
+                      <div className="grid justify-items-center gap-[30px] absolute bg-white p-6 w-[250px] sm:w-[350px] rounded-lg ">
+                        <h1 className="text-center text-sm-s sm:text-md-s">
+                          Apakah anda yakin akan mengerjakan pekerjaan ini?
+                        </h1>
+                        <div className="flex gap-3">
+                          <button className="btn-sm-fill md:btn-md-fill text-sm-s bg-red-90 text-white hover:text-red-90 focus:text-red-90">
+                            <span className="hidden lg:inline">Gak Dulu</span>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth={1.5}
+                              stroke="current"
+                              className="lg:hidden size-6"
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                            </svg>
+                          </button>
+                          <button className="btn-sm-fill md:btn-md-fill text-sm-s bg-green-90 text-white hover:text-green-90 focus:text-green-90">
+                            <span className="hidden lg:inline">Gass</span>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="lg:hidden w-6 h-6"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             ))
         )}
       </div>
-      <DetailVacancy />
     </section>
   );
 }

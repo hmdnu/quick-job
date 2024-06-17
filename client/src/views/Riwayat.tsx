@@ -41,7 +41,9 @@ const Riwayat = () => {
         </button>
         <button
           onClick={() => setSelectedSegment(2)}
-          className="btn-md-fill focus:bg-white focus:text-green-90"
+          className={`btn-md-fill focus:bg-white focus:text-green-90
+            ${selectedSegment === 2 ? "btn-active" : ""}
+            `}
         >
           Selesai
         </button>
@@ -58,18 +60,16 @@ const Riwayat = () => {
               className="grid gap-[10px] md:mb-[20px] max-w-[54rem] p-4 bg-white border border-gray-200 rounded-lg shadow"
             >
               <div>
-                <h1 className="text-md-s md:text-xl-s">{job.title}</h1>
+                <h1 className="text-md-s md:text-lg-s">{job.title}</h1>
               </div>
               <div>
-                <h6 className="text-trunks text-sm-r md:text-md-r">
+                <h6 className="text-trunks text-sm-r">
                   Nama Klien: {job.username}
                 </h6>
-                <h6 className="text-trunks text-sm-r md:text-md-r">
+                <h6 className="text-trunks text-sm-r">
                   Lokasi: {job.location}
                 </h6>
-                <h6 className="text-trunks text-sm-r md:text-md-r">
-                  Fee: {job.sallary}
-                </h6>
+                <h6 className="text-trunks text-sm-r">Fee: {job.sallary}</h6>
               </div>
               <div>
                 <p className="text-trunks text-sm-r md:text-md-r">{job.desc}</p>
@@ -125,7 +125,7 @@ const Riwayat = () => {
                     ${job.status === "complete" ? "hidden" : "flex"}
                   `}
                 >
-                  <span className="hidden lg:inline">Kerjakan</span>
+                  <span className="hidden lg:inline">Selesai</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="lg:hidden w-6 h-6"

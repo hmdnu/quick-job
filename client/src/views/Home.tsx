@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { Vacancy } from "../components";
+import { DetailVacancy, Vacancy } from "../components";
+
 export default function Home() {
   useEffect(() => {
     document.title = "Quick Job | Home";
@@ -7,7 +8,10 @@ export default function Home() {
 
   return (
     <>
-      <Vacancy />
+      <section className="flex">
+        <Vacancy />
+        <DetailVacancy />
+      </section>
     </>
   );
 }

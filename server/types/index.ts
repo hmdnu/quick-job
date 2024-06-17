@@ -1,4 +1,4 @@
-import { STATUS, PAYMENT } from "@/constant";
+import { PAYMENT, STATUS } from "@/constant";
 
 export interface User {
   id: string;

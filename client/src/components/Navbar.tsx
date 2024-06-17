@@ -1,16 +1,17 @@
-import { Link } from "react-router-dom";
-import { useCookies } from "react-cookie";
 import { jwtDecode } from "jwt-decode";
+import moment from "moment";
 import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
+import { Link } from "react-router-dom";
 import { useGetUser } from "../hooks/user";
 import { Token, User } from "../types";
-import moment from "moment";
 import formatName from "../helpers/formatName";
 
 export default function Navbar() {
   const [cookies, setCookie, removeCookie] = useCookies(["access-token"]);
   const [user, setUser] = useState<User>();
   const [dateCreated, setDateCreated] = useState("");
+  const [navMobile, setNavMobile] = useState(false);
 
   const { data, error, isError, isPending, mutate } = useGetUser();
 
@@ -20,6 +21,16 @@ export default function Navbar() {
     if (isConfirm) {
       removeCookie("access-token");
     }
+  }
+
+  function handleOpenNavMobile() {
+    setNavMobile((prev) => !prev);
+    document.querySelector("body")?.classList.add("overflow-hidden");
+  }
+
+  function handleCloseNavMobile() {
+    setNavMobile((prev) => !prev);
+    document.querySelector("body")?.classList.remove("overflow-hidden");
   }
 
   useEffect(() => {
@@ -43,8 +54,8 @@ export default function Navbar() {
   }, [user, data]);
 
   return (
-    <nav className="fixed w-full top-0 bg-navbar bg-center">
-      <div className="static max-w-screen-xl flex flex-row items-center gap-[20px] justify-between md:justify-start mx-auto p-4">
+    <nav className="fixed z-30 w-full top-0 bg-navbar bg-center">
+      <div className="static max-w-screen-xl flex flex-row items-center gap-[20px] justify-between lg:justify-start mx-auto p-4">
         {/* Logo */}
         <Link to={"/"} className="flex md:grid justify-items-center basis-20 items-center space-x-3">
           <img src="/img/logo-quickjob.png" className="h-[40px]" alt="Flowbite Logo" />
@@ -72,7 +83,7 @@ export default function Navbar() {
           </Link>
 
           {/* Search Bar */}
-          <div className="grid xl:basis-3/5">
+          <div className="grid md:basis-3/5">
             <div className="relative hidden md:block">
               <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                 <svg
@@ -95,7 +106,7 @@ export default function Navbar() {
               <input
                 type="text"
                 id="search-navbar"
-                className="text-md-s block w-full px-4 py-2 ps-10 text-sm text-trunk border-none rounded-lg bg-gohan focus:outline-none"
+                className="text-md-r !font-semibold block w-full px-4 py-2 ps-10 text-sm text-trunk border-none rounded-lg bg-gohan focus:outline-none"
                 placeholder="Cari apa hayo..."
               />
             </div>
@@ -103,7 +114,7 @@ export default function Navbar() {
         </div>
 
         {/* Profile */}
-        <div className="hidden lg:grid absolute h-[274px] w-[268px] gap-[20px] rounded-lg bg-white border-2 border-trunks border-opacity-10 p-[15px] top-[24px] right-[20px]">
+        <div className="hidden xl:grid absolute h-[274px] w-[268px] gap-[20px] rounded-lg bg-white border-2 border-trunks border-opacity-10 p-[15px] top-[24px] right-[20px]">
           <div className="w-full bg-green-90 flex justify-center py-2 rounded-lg">
             <img src="/img/user.jpg" alt="user" className="w-[50px] h-[50px] rounded-full" />
           </div>
@@ -117,20 +128,45 @@ export default function Navbar() {
           <ul className="h-full gap-3 lg:grid">
             <li className="flex flex-row items-center gap-[12px] cursor-pointer">
               <img src="/img/time.svg" alt="time" />
-              <Link to={"/riwayat"} className="text-sm-r">
+              <Link to={"/riwayat"} className="text-sm-r hover:text-sm-s focus:text-sm-s">
                 Riwayat
               </Link>
             </li>
             <li className="flex flex-row items-center gap-[12px] cursor-pointer">
               <img src="/img/log-out.svg" alt="logout" />
-              <button onClick={handleLogout} className="text-sm-r">
+              <button onClick={handleLogout} className="text-sm-r hover:text-sm-s focus:text-sm-s">
                 Log out
               </button>
             </li>
           </ul>
         </div>
-        <button>
-          <img src="/img/user.jpg" alt="user" className="w-[40px] h-[40px] rounded-full" />
+        <button className="flex xl:hidden">
+          <img
+            src="/img/user.jpg"
+            alt="user"
+            className="w-[40px] h-[40px] rounded-full"
+            onClick={handleOpenNavMobile}
+          />
+          {navMobile && (
+            <div
+              id="navMobile"
+              onClick={handleCloseNavMobile}
+              className="bg-[rgba(0,0,0,.5)] w-full h-screen fixed z-50 top-0 left-0 overflow-hidden"
+            >
+              <div className="gap-[30px] absolute bg-white p-3 w-[100px] right-5 lg:right-36 top-16 rounded-lg ">
+                <li className="flex flex-row items-center gap-[12px] cursor-pointer">
+                  <Link to={"/riwayat"} className="text-sm-r hover:text-sm-s focus:text-sm-s">
+                    Riwayat
+                  </Link>
+                </li>
+                <li className="flex flex-row items-center gap-[12px] cursor-pointer">
+                  <button onClick={handleLogout} className="text-sm-r hover:text-sm-s focus:text-sm-s">
+                    Log out
+                  </button>
+                </li>
+              </div>
+            </div>
+          )}
         </button>
       </div>
     </nav>

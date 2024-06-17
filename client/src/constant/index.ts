@@ -30,6 +30,12 @@ export enum STATUS {
   CANCELED = "Dibatalkan",
 }
 
+export enum POST_STATUS {
+  DONE = "DONE",
+  ONGOING = "ONGOING",
+  CANCELED = "CANCELED",
+}
+
 export const PROFILE_LINKS = [
   { href: "/riwayat", key: "riwayat", icon: "/img/time.svg", label: "Riwayat" },
   {

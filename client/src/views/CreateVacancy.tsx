@@ -9,7 +9,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { jwtDecode } from "jwt-decode";
-import { z } from "zod";
 import formatToISO from "../helpers/formatDate";
 
 export default function CreateVacancy() {
