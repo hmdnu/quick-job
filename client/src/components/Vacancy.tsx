@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
-import { useGetPosts, useUpdatePost } from "../hooks/post";
-import { Post } from "../types";
-import formatCurrency from "../helpers/formatCurrency";
-import formatName from "../helpers/formatName";
 import moment from "moment";
 import "moment/dist/locale/id";
-import { sortPostsByDate } from "../helpers";
-import { useStoreJobDetails, useStoreModalConfirmation } from "../hooks/zustand";
+import { useEffect, useState } from "react";
 import { POST_STATUS } from "../constant";
+import { sortPostsByDate } from "../helpers";
+import formatCurrency from "../helpers/formatCurrency";
+import formatName from "../helpers/formatName";
+import { useGetPosts, useUpdatePost } from "../hooks/post";
+import {
+  useStoreJobDetails,
+  useStoreModalConfirmation,
+} from "../hooks/zustand";
+import { Post } from "../types";
 
 export default function Vacancy() {
   const getPosts = useGetPosts();
@@ -22,7 +25,10 @@ export default function Vacancy() {
   // Filter posts by canceled status
   useEffect(() => {
     const overduePosts = posts?.filter((post) => {
-      return moment().isAfter(post.deadline) && (post.status as string) !== POST_STATUS.CANCELED;
+      return (
+        moment().isAfter(post.deadline) &&
+        (post.status as string) !== POST_STATUS.CANCELED
+      );
     });
 
     if (overduePosts) {
@@ -60,7 +66,7 @@ export default function Vacancy() {
   }, [getPosts, posts]);
 
   return (
-    <section className="mt-[120px] md:flex md:justify-center lg:justify-start h-full xl:ml-[120px] mx-[20px] my-[20px] gap-[20px]">
+    <section className="mt-[120px] md:flex md:justify-center lg:justify-start sm:grid-cols-2 md:grid-cols-1 justify-items-center h-full xl:ml-[100px] m-[20px] gap-[20px]">
       <div className="grid md:inline-block gap-[20px]">
         {getPosts.isPending ? (
           <div>Loading bro</div>
@@ -77,17 +83,25 @@ export default function Vacancy() {
               >
                 <div className="flex justify-between">
                   <div className="flex flexCenter gap-[10px]">
-                    <img src={""} alt="user" className="w-[40px] h-[40px] lg:w-[50px] lg:h-[50px] rounded-full" />
-                    <div className="flex lg:grid gap-1 items-center justify-start">
-                      <h1 className="text-bulma text-sm-s">{`${formatName(post.creator.firstname)} ${formatName(
-                        post.creator.lastname
-                      )}`}</h1>
-                      <div className="lg:hidden bg-bulma h-1 w-1 rounded-full"></div>
-                      <h6 className="text-trunks text-xs-r">{moment(post.createdAt).fromNow()}</h6>
+                    <img
+                      src={""}
+                      alt="user"
+                      className="w-[40px] h-[40px] lg:w-[50px] lg:h-[50px] rounded-full"
+                    />
+                    <div className="flex sm:grid gap-1 items-center justify-start">
+                      <h1 className="text-bulma text-sm-s">{`${formatName(
+                        post.creator.firstname
+                      )} ${formatName(post.creator.lastname)}`}</h1>
+                      <div className="sm:hidden bg-bulma h-1 w-1 rounded-full"></div>
+                      <h6 className="text-trunks text-xs-r">
+                        {moment(post.createdAt).fromNow()}
+                      </h6>
                     </div>
                   </div>
                   <div className="lg:hidden lg:mt-[20px] h-full inline-block rounded-lg bg-chici-90 bg-opacity-30 px-[6px] pt-[6px]">
-                    <h5 className="mb-2 text-sm-s text-chici-90">{moment(post.deadline).toNow(true)}</h5>
+                    <h5 className="mb-2 text-sm-s text-chici-90">
+                      {moment(post.deadline).toNow(true)}
+                    </h5>
                   </div>
                   <div className="hidden lg:flex">
                     <h1 className="text-lg-s">{formatCurrency(post.price)}</h1>
@@ -101,9 +115,15 @@ export default function Vacancy() {
                   </h5>
                 </div>
                 <div className="grid mt-[10px] gap-[10px] md:gap-0">
-                  <h1 className="text-sm-s md:text-md-s text-bulma">{post.title}</h1>
-                  <p className="line-clamp-1 lg:line-clamp-2 text-xs-r md:text-sm-r text-trunks">{post.desc}</p>
-                  <span className="text-xs-r md:text-sm-r text-trunks">{post.address}</span>
+                  <h1 className="text-sm-s md:text-md-s text-bulma">
+                    {post.title}
+                  </h1>
+                  <p className="line-clamp-1 lg:line-clamp-2 text-xs-r md:text-sm-r text-trunks">
+                    {post.desc}
+                  </p>
+                  <span className="text-xs-r md:text-sm-r text-trunks">
+                    {post.address}
+                  </span>
                 </div>
                 <div className="mt-[10px] flex justify-end gap-[5px]">
                   <button className="btn-sm-fill rounded-full bg-orange-90 text-white hover:text-orange-90 focus:text-orange-90 text-sm font-semibold">
@@ -135,7 +155,12 @@ export default function Vacancy() {
                       viewBox="0 0 24 24"
                       stroke="currentColor"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M5 13l4 4L19 7"
+                      />
                     </svg>
                   </button>
                   {isOpen && (
@@ -158,7 +183,11 @@ export default function Vacancy() {
                               stroke="current"
                               className="lg:hidden size-6"
                             >
-                              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M6 18 18 6M6 6l12 12"
+                              />
                             </svg>
                           </button>
                           <button className="btn-sm-fill md:btn-md-fill text-sm-s bg-green-90 text-white hover:text-green-90 focus:text-green-90">
@@ -170,7 +199,12 @@ export default function Vacancy() {
                               viewBox="0 0 24 24"
                               stroke="currentColor"
                             >
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M5 13l4 4L19 7"
+                              />
                             </svg>
                           </button>
                         </div>

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { DetailVacancy, Vacancy } from "../components";
+import Chat from "../components/Chat";
 
 export default function Home() {
   useEffect(() => {
@@ -11,6 +12,7 @@ export default function Home() {
       <section className="flex">
         <Vacancy />
         <DetailVacancy />
+        <Chat />
       </section>
     </>
   );
