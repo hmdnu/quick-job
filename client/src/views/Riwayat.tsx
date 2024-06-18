@@ -13,10 +13,20 @@ const Riwayat = () => {
     );
   };
 
+  const handleCancelJob = (key: number) => {
+    setJobs((prevJobs) =>
+      prevJobs.map((job) =>
+        job.key === key ? { ...job, status: "cancelled" } : job
+      )
+    );
+  };
+
   const currentJobs =
     selectedSegment === 1
       ? jobs.filter((job) => job.status === "ongoing")
-      : jobs.filter((job) => job.status === "complete");
+      : selectedSegment === 2
+      ? jobs.filter((job) => job.status === "complete")
+      : jobs.filter((job) => job.status === "cancelled");
 
   const onGoingJobs = DUMMY_VACANCY.filter((job) => job.status === "ongoing");
 
@@ -30,7 +40,7 @@ const Riwayat = () => {
 
   return (
     <section className="grid mt-[100px] md:mt-[120px] lg:ml-[100px] gap-[20px] px-6">
-      <div className="flex p-2 text-white text-sm-s rounded-lg w-[182px] bg-green-90">
+      <div className="flex mx-auto md:mx-0 p-2 text-white text-sm-s rounded-lg w-[286px] bg-green-90">
         <button
           onClick={() => setSelectedSegment(1)}
           className={`btn-md-fill focus:bg-white focus:text-green-90
@@ -46,6 +56,14 @@ const Riwayat = () => {
             `}
         >
           Selesai
+        </button>
+        <button
+          onClick={() => setSelectedSegment(3)}
+          className={`btn-md-fill focus:bg-white focus:text-green-90
+            ${selectedSegment === 3 ? "btn-active" : ""}
+            `}
+        >
+          Dibatalkan
         </button>
       </div>
       {selectedSegment === 1 && onGoingJobs.length === 0 ? (
@@ -76,9 +94,13 @@ const Riwayat = () => {
               </div>
               <div className="flex flexEnd gap-[10px] md:mt-[20px]">
                 <button
-                  onClick={() => handleCompleteJob(job.key)}
+                  onClick={() => handleCancelJob(job.key)}
                   className={`btn-md-fill text-sm-s bg-red-90 text-white hover:text-red-90 focus:text-red-90 
-                    ${job.status === "complete" ? "hidden" : "flex"}
+                    ${
+                      job.status === "complete" || job.status === "cancelled"
+                        ? "hidden"
+                        : "flex"
+                    }
                   `}
                 >
                   <span className="hidden lg:inline">Batalkan</span>
@@ -98,10 +120,11 @@ const Riwayat = () => {
                   </svg>
                 </button>
                 <button
-                  onClick={() => handleCompleteJob(job.key)}
-                  className={`btn-md-fill text-sm-s bg-orange-90 text-white hover:text-orange-90 focus:text-orange-90 
-                    ${job.status === "complete" ? "hidden" : "flex"}
-                  `}
+                  className={`btn-md-fill text-sm-s bg-orange-90 text-white hover:text-orange-90 focus:text-orange-90 ${
+                    job.status === "complete" || job.status === "cancelled"
+                      ? "hidden"
+                      : "flex"
+                  }`}
                 >
                   <span className="hidden lg:inline">Hubungi Klien</span>
                   <svg
@@ -122,7 +145,11 @@ const Riwayat = () => {
                 <button
                   onClick={() => handleCompleteJob(job.key)}
                   className={`btn-md-fill text-sm-s bg-green-90 text-white hover:text-green-90 focus:text-green-90 
-                    ${job.status === "complete" ? "hidden" : "flex"}
+                    ${
+                      job.status === "complete" || job.status === "cancelled"
+                        ? "hidden"
+                        : "flex"
+                    }
                   `}
                 >
                   <span className="hidden lg:inline">Selesai</span>
