@@ -87,7 +87,6 @@ export async function handleGetUser(c: Context) {
       },
       include: {
         posts: true,
-        job: true,
       },
     });
 

@@ -2,25 +2,39 @@ import { create } from "zustand";
 import { Post } from "../types";
 
 interface ShowJobDetails {
-  showJobDetails: boolean;
+  isShowJobDetails: boolean;
   jobContent: Post | null;
-  isShowJobDetails: (post: Post) => void;
+  setShowJobDetails: (post: Post) => void;
 }
 
 interface ModalConfirmation {
+  isConfirm: boolean;
   isOpen: boolean;
-  openModal: () => void;
-  closeModal: () => void;
+  setOpenModal: () => void;
+  setCloseModal: () => void;
+  setConfirm: () => void;
+}
+
+interface Search {
+  posts: string;
+  setPosts: (posts: string) => void;
 }
 
 export const useStoreJobDetails = create<ShowJobDetails>((set) => ({
-  showJobDetails: false,
+  isShowJobDetails: false,
   jobContent: null,
-  isShowJobDetails: (content) => set({ showJobDetails: true, jobContent: content }),
+  setShowJobDetails: (content) => set({ isShowJobDetails: true, jobContent: content }),
 }));
 
 export const useStoreModalConfirmation = create<ModalConfirmation>((set) => ({
+  isConfirm: false,
   isOpen: false,
-  openModal: () => set({ isOpen: true }),
-  closeModal: () => set({ isOpen: false }),
+  setOpenModal: () => set({ isOpen: true }),
+  setCloseModal: () => set({ isOpen: false }),
+  setConfirm: () => set({ isConfirm: true }),
+}));
+
+export const useStoreSearch = create<Search>((set) => ({
+  posts: "",
+  setPosts: (posts) => set({ posts }),
 }));

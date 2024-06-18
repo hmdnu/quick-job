@@ -34,6 +34,7 @@ export enum POST_STATUS {
   DONE = "DONE",
   ONGOING = "ONGOING",
   CANCELED = "CANCELED",
+  IDLE = "IDLE",
 }
 
 export const PROFILE_LINKS = [
@@ -85,7 +86,7 @@ export const TIME_BUTTON = [
   { key: 3, label: "30 Menit" },
   { key: 4, label: "45 Menit" },
   { key: 5, label: "60 menit" },
-  { key: 6, label: "Sampai lowongan dihapus" },
+  // { key: 6, label: "Sampai lowongan dihapus" },
 ];
 
 export const PAYMENT_METHOD = [

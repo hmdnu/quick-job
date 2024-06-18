@@ -29,19 +29,10 @@ export default function CreateVacancy() {
   const { mutate, isPending, error, data, isError, isSuccess } = useCreatePost();
 
   const onSubmit = (formData: NewPost) => {
-    console.log(typeof formData.price);
     if (cookies["access-token"]) {
       const userToken: Token = jwtDecode(cookies["access-token"]);
 
       mutate({
-        ...formData,
-        price: formData.price,
-        creatorId: userToken.id,
-        deadline: formatToISO(formData.deadline.split(" ")[0]),
-        payment: formData.payment === "Tunai" ? "CASH" : "TRANSFER",
-      });
-
-      console.log({
         ...formData,
         price: formData.price,
         creatorId: userToken.id,
