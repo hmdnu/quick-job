@@ -6,6 +6,7 @@ import "./index.css";
 import { Home, RootLayout, SignIn } from "./views";
 import CreateVacancy from "./views/CreateVacancy";
 import ErrorPage from "./views/ErrorPage";
+import MobileChat from "./views/MobileChat";
 import Riwayat from "./views/Riwayat";
 import SignUp from "./views/SignUp";
 
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/riwayat",
         element: <Riwayat />,
+      },
+      {
+        path: "/chat",
+        element: <MobileChat />,
       },
     ],
   },

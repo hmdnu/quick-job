@@ -183,6 +183,14 @@ export default function Navbar() {
                     Buat Lowongan
                   </Link>
                 </li>
+                <li className="flex sm:hidden flex-row items-center gap-[12px] cursor-pointer">
+                  <Link
+                    to={"/chat"}
+                    className="text-sm-r hover:text-sm-s focus:text-sm-s"
+                  >
+                    Kotak Pesan
+                  </Link>
+                </li>
                 <li className="flex flex-row items-center gap-[12px] cursor-pointer">
                   <Link
                     to={"/riwayat"}
