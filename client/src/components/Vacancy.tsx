@@ -66,8 +66,8 @@ export default function Vacancy() {
   }, [getPosts, posts]);
 
   return (
-    <section className="mt-[120px] md:flex md:justify-center lg:justify-start sm:grid-cols-2 md:grid-cols-1 justify-items-center h-full xl:ml-[100px] m-[20px] gap-[20px]">
-      <div className="grid md:inline-block gap-[20px]">
+    <section className="mt-[100px] lg:mt-[120px] grid grid-cols-1 w-full md:w-[300px] lg:w-[350px] justify-items-center items-center md:flex md:justify-center lg:justify-start sm:grid-cols-2 md:grid-cols-1 h-full xl:ml-[100px] m-[20px] gap-[20px]">
+      <div className="grid w-full sm:w-[300px] lg:w-full md:inline-block gap-[20px]">
         {getPosts.isPending ? (
           <div>Loading bro</div>
         ) : posts.length === 0 ? (
@@ -88,11 +88,11 @@ export default function Vacancy() {
                       alt="user"
                       className="w-[40px] h-[40px] lg:w-[50px] lg:h-[50px] rounded-full"
                     />
-                    <div className="flex sm:grid gap-1 items-center justify-start">
+                    <div className="grid gap-1 items-center justify-start">
                       <h1 className="text-bulma text-sm-s">{`${formatName(
                         post.creator.firstname
                       )} ${formatName(post.creator.lastname)}`}</h1>
-                      <div className="sm:hidden bg-bulma h-1 w-1 rounded-full"></div>
+                      <div className="hidden bg-bulma h-1 w-1 rounded-full"></div>
                       <h6 className="text-trunks text-xs-r">
                         {moment(post.createdAt).fromNow()}
                       </h6>
