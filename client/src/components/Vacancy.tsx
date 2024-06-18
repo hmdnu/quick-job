@@ -19,6 +19,7 @@ export default function Vacancy() {
   const [postToUpdate, setPostToUpdate] = useState<Post[]>([]);
   const { isShowJobDetails } = useStoreJobDetails();
   const { closeModal, isOpen, openModal } = useStoreModalConfirmation();
+  const [isDescExpanded, setDescExpanded] = useState(false);
 
   moment.locale("id");
 
@@ -64,6 +65,11 @@ export default function Vacancy() {
       console.log(getPosts.error);
     }
   }, [getPosts, posts]);
+
+  function handleDescExpanded() {
+    setDescExpanded((prev: any) => !prev);
+    document.getElementById("description")?.classList.toggle("truncate");
+  }
 
   return (
     <section className="mt-[100px] lg:mt-[120px] grid grid-cols-1 w-full md:w-[300px] lg:w-[350px] justify-items-center items-center md:flex md:justify-center lg:justify-start sm:grid-cols-2 md:grid-cols-1 h-full xl:ml-[100px] m-[20px] gap-[20px]">
@@ -118,9 +124,18 @@ export default function Vacancy() {
                   <h1 className="text-sm-s md:text-md-s text-bulma">
                     {post.title}
                   </h1>
-                  <p className="line-clamp-1 lg:line-clamp-2 text-xs-r md:text-sm-r text-trunks">
+                  <p
+                    id="description"
+                    className="truncate ... text-xs-r md:text-sm-r text-trunks"
+                  >
                     {post.desc}
                   </p>
+                  <div
+                    onClick={handleDescExpanded}
+                    className="flex md:hidden text-xs-r text-green-90"
+                  >
+                    {isDescExpanded ? "Read Less" : "Read More"}
+                  </div>
                   <span className="text-xs-r md:text-sm-r text-trunks">
                     {post.address}
                   </span>
