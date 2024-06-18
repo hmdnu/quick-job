@@ -8,8 +8,10 @@ export default function Home() {
 
   return (
     <>
-      <section className="flex">
-        <Vacancy />
+      <section className="flex mt-[150px]">
+        <div className="mr-14">
+          <Vacancy />
+        </div>
         <DetailVacancy />
       </section>
     </>

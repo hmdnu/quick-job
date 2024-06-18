@@ -1,13 +1,14 @@
 import moment from "moment";
 import { formatCurrency, formatName } from "../helpers";
-import { useStoreJobDetails } from "../hooks/zustand";
+import { useStoreJobDetails, useStoreModalConfirmation } from "../hooks/zustand";
 
 const DetailVacancy = () => {
-  const { jobContent, showJobDetails } = useStoreJobDetails();
+  const { jobContent, isShowJobDetails } = useStoreJobDetails();
+  const { setOpenModal } = useStoreModalConfirmation();
 
   return (
     <>
-      {!showJobDetails ? (
+      {!isShowJobDetails ? (
         <section className="sticky z-10 top-[120px] md:basis-3/5 lg:basis-2/5 hidden h-full md:grid">
           <div className="grid justify-items-center py-[20px] bg-white border border-gray-200 rounded-lg shadow">
             <h1 className="text-center text-green-90 text-2xl-s">Tampilkan Detail Pekerjaan Disini</h1>
@@ -18,7 +19,11 @@ const DetailVacancy = () => {
         <section className="sticky top-[120px] md:basis-3/5 lg:basis-2/5 p-[20px] hidden h-full md:grid border border-gray-200 rounded-lg shadow">
           <div className="grid justify-items-start">
             <div className="flex flexCenter gap-[10px]">
-              <img src={""} alt="user" className="w-[40px] h-[40px] lg:w-[50px] lg:h-[50px] rounded-full" />
+              <img
+                src={"/img/user2.jpg"}
+                alt="user"
+                className="w-[40px] h-[40px] lg:w-[50px] lg:h-[50px] rounded-full"
+              />
               <div className="flex md:grid gap-1 items-center justify-start">
                 <h1 className="text-bulma text-sm-s">{`${formatName(jobContent?.creator.firstname || "")} ${formatName(
                   jobContent?.creator.lastname || ""
@@ -78,7 +83,7 @@ const DetailVacancy = () => {
             </div>
             <p className="text-sm-r md:text-md-r text-trunks">{jobContent?.desc}</p>
           </div>
-          {/* <div className="mt-[20px] flex justify-end gap-[5px]">
+          <div className="mt-[20px] flex justify-end gap-[5px]">
             <button className="btn-sm-fill rounded-full bg-orange-90 text-white hover:text-orange-90 focus:text-orange-90 text-sm font-semibold">
               <span className="hidden md:inline">Hubungi Klien</span>
               <svg
@@ -96,7 +101,10 @@ const DetailVacancy = () => {
                 />
               </svg>
             </button>
-            <button className="btn-sm-fill bg-green-90 text-white hover:text-green-90 focus:text-green-90 text-sm font-semibold">
+            <button
+              onClick={setOpenModal}
+              className="btn-sm-fill bg-green-90 text-white hover:text-green-90 focus:text-green-90 text-sm font-semibold"
+            >
               <span className="hidden md:inline">Kerjakan</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -108,7 +116,7 @@ const DetailVacancy = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
               </svg>
             </button>
-          </div> */}
+          </div>
         </section>
       )}
     </>

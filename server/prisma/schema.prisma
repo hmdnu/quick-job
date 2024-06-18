@@ -24,7 +24,7 @@ model User {
   createdAt DateTime @default(now())
   isWorker Boolean @default(false)
   posts Post[]
-  job Job? 
+  jobs Job[]
 }
 
 model Post{
@@ -38,24 +38,26 @@ model Post{
   creatorId String? 
   creator User? @relation(fields: [creatorId], references: [id])
   worker Job?
-  status POST_STATUS @default(ONGOING)
+  status POST_STATUS @default(IDLE)
   address String
 }
 
 model Job {
   id String @unique
-  jobTitle String
   isDone Boolean @default(false)
   clientId String @unique
-  client User @relation(fields: [clientId], references: [id])
+  jobId String @unique
   postId String @unique
   post Post @relation(fields: [postId], references: [id])
+  workerId String @unique
+  worker User @relation(fields: [workerId], references: [id])
 }
 
 enum POST_STATUS {
   ONGOING
   DONE
   CANCELED
+  IDLE
 }
 
 enum PAYMENT {

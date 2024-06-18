@@ -26,6 +26,7 @@ export enum STATUS {
   ONGOING = "ONGOING",
   DONE = "DONE",
   CANCELED = "CANCELED",
+  IDLE = "IDLE",
 }
 
 export enum PAYMENT {

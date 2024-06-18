@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useGetUser } from "../hooks/user";
 import { Token, User } from "../types";
 import formatName from "../helpers/formatName";
+import { useStoreSearch } from "../hooks/zustand";
 
 export default function Navbar() {
   const [cookies, setCookie, removeCookie] = useCookies(["access-token"]);
@@ -14,6 +15,7 @@ export default function Navbar() {
   const [navMobile, setNavMobile] = useState(false);
 
   const { data, error, isError, isPending, mutate } = useGetUser();
+  const { setPosts, posts } = useStoreSearch();
 
   function handleLogout() {
     const isConfirm = confirm("You sure wanna logout?");
@@ -46,7 +48,7 @@ export default function Navbar() {
         return;
       }
     }
-  }, [cookies, mutate, error, isError]);
+  }, [cookies, mutate, error, isError, posts]);
 
   useEffect(() => {
     setUser(data?.data);
@@ -108,6 +110,9 @@ export default function Navbar() {
                 id="search-navbar"
                 className="text-md-r !font-semibold block w-full px-4 py-2 ps-10 text-sm text-trunk border-none rounded-lg bg-gohan focus:outline-none"
                 placeholder="Cari apa hayo..."
+                onChange={(e) => {
+                  setPosts(e.target.value);
+                }}
               />
             </div>
           </div>

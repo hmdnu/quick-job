@@ -6,16 +6,20 @@ import formatName from "../helpers/formatName";
 import moment from "moment";
 import "moment/dist/locale/id";
 import { sortPostsByDate } from "../helpers";
-import { useStoreJobDetails, useStoreModalConfirmation } from "../hooks/zustand";
+import { useStoreJobDetails, useStoreModalConfirmation, useStoreSearch } from "../hooks/zustand";
 import { POST_STATUS } from "../constant";
+import ModalConfim from "./ModalConfim";
 
 export default function Vacancy() {
   const getPosts = useGetPosts();
   const updatePosts = useUpdatePost();
   const [posts, setPosts] = useState<Post[]>([]);
   const [postToUpdate, setPostToUpdate] = useState<Post[]>([]);
-  const { isShowJobDetails } = useStoreJobDetails();
-  const { closeModal, isOpen, openModal } = useStoreModalConfirmation();
+  const [queryPost, setQueryPost] = useState<Post[]>([]);
+
+  const { setShowJobDetails } = useStoreJobDetails();
+  const { isOpen, setOpenModal } = useStoreModalConfirmation();
+  const { posts: searchedPost } = useStoreSearch();
 
   moment.locale("id");
 
@@ -50,34 +54,45 @@ export default function Vacancy() {
 
   // Display posts
   useEffect(() => {
-    if (getPosts.isSuccess) {
-      setPosts(sortPostsByDate(getPosts.data?.data));
+    if (getPosts.isSuccess && getPosts.data?.data) {
+      setPosts(sortPostsByDate(getPosts.data.data));
     }
 
     if (getPosts.isError) {
-      console.log(getPosts.error);
+      console.error(getPosts.error);
     }
-  }, [getPosts, posts]);
+  }, [getPosts, searchedPost]);
+
+  // search query post
+  useEffect(() => {
+    const post = posts?.filter((post) => post.title.includes(searchedPost));
+
+    setQueryPost(post);
+  }, [searchedPost, posts]);
 
   return (
     <section className="mt-[120px] md:flex md:justify-center lg:justify-start h-full xl:ml-[120px] mx-[20px] my-[20px] gap-[20px]">
       <div className="grid md:inline-block gap-[20px]">
         {getPosts.isPending ? (
-          <div>Loading bro</div>
+          <div className="md:mb-[20px] max-w-sm p-4 gap-[10px]">Loading bro</div>
         ) : posts.length === 0 ? (
-          <div>kosong</div>
+          <div className="md:mb-[20px] max-w-sm p-4 gap-[10px]">kosong</div>
         ) : (
-          posts
-            ?.filter((post) => (post.status as string) !== POST_STATUS.CANCELED)
+          queryPost
+            ?.filter((post) => (post.status as string) === POST_STATUS.IDLE)
             .map((post) => (
               <div
                 key={post.id}
-                onClick={() => isShowJobDetails(post)}
+                onClick={() => setShowJobDetails(post)}
                 className="cursor-pointer md:mb-[20px] max-w-sm p-4 gap-[10px] bg-white border border-gray-200 rounded-lg shadow"
               >
                 <div className="flex justify-between">
                   <div className="flex flexCenter gap-[10px]">
-                    <img src={""} alt="user" className="w-[40px] h-[40px] lg:w-[50px] lg:h-[50px] rounded-full" />
+                    <img
+                      src={"/img/user2.jpg"}
+                      alt="user"
+                      className="w-[40px] h-[40px] lg:w-[50px] lg:h-[50px] rounded-full"
+                    />
                     <div className="flex lg:grid gap-1 items-center justify-start">
                       <h1 className="text-bulma text-sm-s">{`${formatName(post.creator.firstname)} ${formatName(
                         post.creator.lastname
@@ -124,7 +139,7 @@ export default function Vacancy() {
                     </svg>
                   </button>
                   <button
-                    onClick={openModal}
+                    onClick={setOpenModal}
                     className="btn-sm-fill bg-green-90 text-white hover:text-green-90 focus:text-green-90 text-sm font-semibold"
                   >
                     <span className="hidden lg:inline">Kerjakan</span>
@@ -138,45 +153,7 @@ export default function Vacancy() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                     </svg>
                   </button>
-                  {isOpen && (
-                    <div
-                      onClick={closeModal}
-                      className="flex justify-center mx-auto items-center bg-[rgba(0,0,0,.5)] w-full h-screen fixed z-50 top-0 left-0 overflow-hidden"
-                    >
-                      <div className="grid justify-items-center gap-[30px] absolute bg-white p-6 w-[250px] sm:w-[350px] rounded-lg ">
-                        <h1 className="text-center text-sm-s sm:text-md-s">
-                          Apakah anda yakin akan mengerjakan pekerjaan ini?
-                        </h1>
-                        <div className="flex gap-3">
-                          <button className="btn-sm-fill md:btn-md-fill text-sm-s bg-red-90 text-white hover:text-red-90 focus:text-red-90">
-                            <span className="hidden lg:inline">Gak Dulu</span>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              strokeWidth={1.5}
-                              stroke="current"
-                              className="lg:hidden size-6"
-                            >
-                              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-                            </svg>
-                          </button>
-                          <button className="btn-sm-fill md:btn-md-fill text-sm-s bg-green-90 text-white hover:text-green-90 focus:text-green-90">
-                            <span className="hidden lg:inline">Gass</span>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="lg:hidden w-6 h-6"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                            </svg>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  )}
+                  {isOpen && <ModalConfim />}
                 </div>
               </div>
             ))

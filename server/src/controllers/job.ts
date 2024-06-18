@@ -3,35 +3,43 @@ import { Context } from "hono";
 import { v4 as uuid } from "uuid";
 import { StatusCodes as http } from "http-status-codes";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
+import { STATUS } from "@/constant";
 
 export async function handleCreateJob(c: Context) {
   const postId = c.req.query("postId");
   const clientId = c.req.query("clientId");
-  const { jobTitle } = await c.req.json();
 
   try {
-    const post = await prisma.job.create({
-      data: {
-        id: uuid(),
-        jobTitle,
-        client: {
-          connect: {
-            id: clientId,
-          },
-        },
-        post: {
-          connect: {
-            id: postId,
-          },
-        },
-      },
-      include: {
-        client: true,
-        post: true,
-      },
-    });
+    // const post = await prisma.job.create({
+    //   data: {
+    //     id: uuid(),
+    //     client: {
+    //       connect: {
+    //         id: clientId,
+    //       },
+    //     },
+    //     post: {
+    //       connect: {
+    //         id: postId,
+    //       },
+    //     },
+    //   },
+    //   include: {
+    //     client: true,
+    //     post: true,
+    //   },
+    // });
 
-    return c.json(post, http.OK);
+    // await prisma.post.update({
+
+    //   data : {
+    //     status : STATUS.ONGOING,
+
+    //   }
+
+    // })
+
+    return c.json("", http.OK);
   } catch (error) {
     if (error instanceof PrismaClientKnownRequestError) {
       c.json({ message: error.message }, http.INTERNAL_SERVER_ERROR);
