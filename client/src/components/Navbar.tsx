@@ -59,22 +59,22 @@ export default function Navbar() {
         {/* Logo */}
         <Link
           to={"/"}
-          className="flex md:grid justify-items-center basis-20 items-center space-x-3"
+          className="grid justify-items-center basis-20 items-center space-x-3"
         >
           <img
             src="/img/logo-quickjob.png"
             className="h-[40px]"
             alt="Flowbite Logo"
           />
-          <span className="text-white text-md-s">QuickJob</span>
+          <span className="text-white text-md-s hidden lg:flex">QuickJob</span>
         </Link>
 
-        <div className="hidden md:flex flex-row justify-center gap-[20px] basis-3/4">
+        <div className="flex flex-row justify-center sm:justify-end md:justify-center gap-[20px] basis-3/4">
           {/* Creat Vacancy Button */}
           <Link
             to={"/create-vacancy"}
             type="button"
-            className="flex w-[220px] xl:basis-1/5 gap-2 text-green-90 bg-gohan px-4 py-2 hover:bg-orange-90 hover:text-white focus:outline-none focus:bg-orange-90 focus:text-white font-bold rounded-lg text-center"
+            className="hidden sm:flex w-[50px] md:w-[220px] xl:basis-1/5 gap-2 text-green-90 bg-gohan px-4 py-2 hover:bg-orange-90 hover:text-white focus:outline-none focus:bg-orange-90 focus:text-white font-bold rounded-lg text-center"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -90,12 +90,12 @@ export default function Navbar() {
                 d="M12 4.5v15m7.5-7.5h-15"
               />
             </svg>
-            Buat Lowongan
+            <span className="hidden md:flex">Buat Lowongan</span>
           </Link>
 
           {/* Search Bar */}
-          <div className="grid md:basis-3/5">
-            <div className="relative hidden md:block">
+          <div className="grid w-full sm:basis-4/5 md:basis-3/5 lg:basis-2/5 xl:basis-3/5">
+            <div className="relative block">
               <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                 <svg
                   className="w-4 h-4 text-trunks dark:text-gray-400"
@@ -117,7 +117,7 @@ export default function Navbar() {
               <input
                 type="text"
                 id="search-navbar"
-                className="text-md-r !font-semibold block w-full px-4 py-2 ps-10 text-sm text-trunk border-none rounded-lg bg-gohan focus:outline-none"
+                className="sm:text-md-r !font-semibold block w-full px-4 py-2 ps-10 text-sm-s text-trunks border-none rounded-lg bg-gohan focus:outline-none"
                 placeholder="Cari apa hayo..."
               />
             </div>
@@ -125,8 +125,8 @@ export default function Navbar() {
         </div>
 
         {/* Profile */}
-        <div className="hidden xl:grid absolute h-[274px] w-[258px] gap-[20px] rounded-lg bg-white border-2 border-trunks border-opacity-10 p-[15px] top-[24px] right-[20px]">
-          <div className="w-full bg-green-90 flex justify-center py-2 rounded-lg">
+        <div className="hidden lg:grid absolute h-[260px] lg:w-[240px] xl:w-[258px] gap-[20px] rounded-lg bg-white border-2 border-trunks border-opacity-10 p-[15px] top-[24px] right-[20px]">
+          <div className="w-full bg-green-90 flex justify-center items-center py-2 rounded-lg">
             <img
               src="/img/user.jpg"
               alt="user"
@@ -174,7 +174,15 @@ export default function Navbar() {
               onClick={handleCloseNavMobile}
               className="bg-[rgba(0,0,0,.5)] w-full h-screen fixed z-50 top-0 left-0 overflow-hidden"
             >
-              <div className="gap-[30px] absolute bg-white p-3 w-[100px] right-5 lg:right-36 top-16 rounded-lg ">
+              <div className="gap-[30px] absolute bg-white p-3 w-[150px] sm:w-[100px] right-5 lg:right-36 top-16 rounded-lg ">
+                <li className="flex sm:hidden flex-row items-center gap-[12px] cursor-pointer">
+                  <Link
+                    to={"/create-vacancy"}
+                    className="text-sm-r hover:text-sm-s focus:text-sm-s"
+                  >
+                    Buat Lowongan
+                  </Link>
+                </li>
                 <li className="flex flex-row items-center gap-[12px] cursor-pointer">
                   <Link
                     to={"/riwayat"}

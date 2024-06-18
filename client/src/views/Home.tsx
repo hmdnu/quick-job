@@ -12,7 +12,9 @@ export default function Home() {
       <section className="flex">
         <Vacancy />
         <DetailVacancy />
-        <Chat />
+        <div className="hidden sm:flex">
+          <Chat />
+        </div>
       </section>
     </>
   );
