@@ -97,3 +97,28 @@ export const PAYMENT_METHOD = [
     label: "Transfer",
   },
 ];
+
+export const DUMMY_CHAT = [
+  {
+    key: 1,
+    userImg: "/img/profile1.jpg",
+    username: "John Doe",
+    timestamp: 1,
+    message:
+      "Hello! Thank you for reaching out. Can you please share your portfolio?",
+  },
+  {
+    key: 2,
+    userImg: "/img/profile2.jpg",
+    username: "Camelia Chan",
+    timestamp: 2,
+    message: "Sure! Here is the link to my portfolio: [portfolio link].",
+  },
+  {
+    key: 3,
+    userImg: "/img/profile3.jpg",
+    username: "Robert Dawney",
+    timestamp: 5,
+    message: "Thank you! Looking forward to hearing from you.",
+  },
+];

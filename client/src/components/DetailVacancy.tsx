@@ -9,14 +9,14 @@ const DetailVacancy = () => {
   return (
     <>
       {!isShowJobDetails ? (
-        <section className="sticky z-10 top-[120px] md:basis-3/5 lg:basis-2/5 hidden h-full md:grid">
+        <section className="sticky z-10 mt-[100px] lg:mt-[120px] md:mr-[20px] md:basis-3/5 lg:basis-2/5 hidden h-full md:grid">
           <div className="grid justify-items-center py-[20px] bg-white border border-gray-200 rounded-lg shadow">
             <h1 className="text-center text-green-90 text-2xl-s">Tampilkan Detail Pekerjaan Disini</h1>
             <img src="/img/larry-home.svg" alt="larry-home" />
           </div>
         </section>
       ) : (
-        <section className="sticky top-[120px] md:basis-3/5 lg:basis-2/5 p-[20px] hidden h-full md:grid border border-gray-200 rounded-lg shadow">
+        <section className="sticky z-10 mt-[100px] lg:mt-[120px] md:mr-[20px] top-[120px] md:basis-3/5 lg:basis-2/5 p-[20px] hidden h-full md:grid border border-gray-200 rounded-lg shadow">
           <div className="grid justify-items-start">
             <div className="flex flexCenter gap-[10px]">
               <img

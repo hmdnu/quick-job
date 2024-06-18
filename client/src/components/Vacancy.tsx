@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
-import { useGetPosts, useUpdatePost } from "../hooks/post";
-import { Post } from "../types";
-import formatCurrency from "../helpers/formatCurrency";
-import formatName from "../helpers/formatName";
 import moment from "moment";
 import "moment/dist/locale/id";
-import { sortPostsByDate } from "../helpers";
-import { useStoreJobDetails, useStoreModalConfirmation, useStoreSearch } from "../hooks/zustand";
+import { useEffect, useState } from "react";
 import { POST_STATUS } from "../constant";
+import { sortPostsByDate } from "../helpers";
+import formatCurrency from "../helpers/formatCurrency";
+import formatName from "../helpers/formatName";
+import { useGetPosts, useUpdatePost } from "../hooks/post";
+import { useStoreJobDetails, useStoreModalConfirmation, useStoreSearch } from "../hooks/zustand";
+import { Post } from "../types";
 import ModalConfim from "./ModalConfim";
 
 export default function Vacancy() {
@@ -20,6 +20,7 @@ export default function Vacancy() {
   const { setShowJobDetails } = useStoreJobDetails();
   const { isOpen, setOpenModal } = useStoreModalConfirmation();
   const { posts: searchedPost } = useStoreSearch();
+  const [isDescExpanded, setDescExpanded] = useState(false);
 
   moment.locale("id");
 
@@ -70,9 +71,14 @@ export default function Vacancy() {
     setQueryPost(post);
   }, [searchedPost, posts]);
 
+  function handleDescExpanded() {
+    setDescExpanded((prev: any) => !prev);
+    document.getElementById("description")?.classList.toggle("truncate");
+  }
+
   return (
-    <section className="mt-[120px] md:flex md:justify-center lg:justify-start h-full xl:ml-[120px] mx-[20px] my-[20px] gap-[20px]">
-      <div className="grid md:inline-block gap-[20px]">
+    <section className="mt-[100px] lg:mt-[120px] grid grid-cols-1 w-full md:w-[300px] lg:w-[350px] justify-items-center items-center md:flex md:justify-center lg:justify-start sm:grid-cols-2 md:grid-cols-1 h-full xl:ml-[100px] m-[20px] gap-[20px]">
+      <div className="grid w-full sm:w-[300px] lg:w-full md:inline-block gap-[20px]">
         {getPosts.isPending ? (
           <div className="md:mb-[20px] max-w-sm p-4 gap-[10px]">Loading bro</div>
         ) : posts.length === 0 ? (
@@ -93,11 +99,11 @@ export default function Vacancy() {
                       alt="user"
                       className="w-[40px] h-[40px] lg:w-[50px] lg:h-[50px] rounded-full"
                     />
-                    <div className="flex lg:grid gap-1 items-center justify-start">
+                    <div className="grid gap-1 items-center justify-start">
                       <h1 className="text-bulma text-sm-s">{`${formatName(post.creator.firstname)} ${formatName(
                         post.creator.lastname
                       )}`}</h1>
-                      <div className="lg:hidden bg-bulma h-1 w-1 rounded-full"></div>
+                      <div className="hidden bg-bulma h-1 w-1 rounded-full"></div>
                       <h6 className="text-trunks text-xs-r">{moment(post.createdAt).fromNow()}</h6>
                     </div>
                   </div>
@@ -117,7 +123,12 @@ export default function Vacancy() {
                 </div>
                 <div className="grid mt-[10px] gap-[10px] md:gap-0">
                   <h1 className="text-sm-s md:text-md-s text-bulma">{post.title}</h1>
-                  <p className="line-clamp-1 lg:line-clamp-2 text-xs-r md:text-sm-r text-trunks">{post.desc}</p>
+                  <p id="description" className="truncate ... text-xs-r md:text-sm-r text-trunks">
+                    {post.desc}
+                  </p>
+                  <div onClick={handleDescExpanded} className="flex md:hidden text-xs-r text-green-90">
+                    {isDescExpanded ? "Read Less" : "Read More"}
+                  </div>
                   <span className="text-xs-r md:text-sm-r text-trunks">{post.address}</span>
                 </div>
                 <div className="mt-[10px] flex justify-end gap-[5px]">
