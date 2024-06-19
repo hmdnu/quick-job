@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { DetailVacancy, Vacancy } from "../components";
+import { Vacancy } from "../components";
 import Chat from "../components/Chat";
 
 export default function Home() {
@@ -9,11 +9,11 @@ export default function Home() {
 
   return (
     <>
-      <section className="flex mt-[150px]">
-        <div className="mr-14">
+      <section className="flex">
+        <div className="mr-[20px]">
           <Vacancy />
         </div>
-        <DetailVacancy />
+        {/* <DetailVacancy /> */}
         <div className="hidden sm:flex">
           <Chat />
         </div>

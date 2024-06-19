@@ -93,7 +93,7 @@ export default function SignIn() {
             </svg>
           </div>
           <div className="flex items-start justify-between max-w-sm mx-auto">
-            <h1 className="content-start text-5xl-s md:text-8xl-s text-green-90 lg:mt-[40px]">
+            <h1 className="content-start text-5xl-s md:text-8xl-s text-dark lg:mt-[40px]">
               Selamat <br />
               datang !
             </h1>
@@ -110,7 +110,7 @@ export default function SignIn() {
             className="max-w-sm mx-auto lg:mt-[20px]"
           >
             <div className="mb-5">
-              <label className="block mb-2 text-sm-s md:text-md-s text-green-90">
+              <label className="block mb-2 text-sm-s md:text-md-s text-dark">
                 Email
               </label>
               <input
@@ -124,7 +124,7 @@ export default function SignIn() {
             </div>
 
             <div className="mb-5">
-              <label className="block text-sm-r md:text-md-s mb-2 text-sm-s text-green-90">
+              <label className="block text-sm-r md:text-md-s mb-2 text-sm-s text-dark">
                 Kata Sandi
               </label>
               <input
@@ -153,7 +153,7 @@ export default function SignIn() {
                 </a>
                 <button
                   type="submit"
-                  className="btn-sm-fill bg-green-90 text-white hover:text-green-90 focus:text-green-90 text-sm font-semibold"
+                  className="btn-sm-fill bg-dark text-white hover:text-dark focus:text-dark text-sm font-semibold"
                   disabled={isPending}
                 >
                   {isPending ? "Loading" : "Sign in"}

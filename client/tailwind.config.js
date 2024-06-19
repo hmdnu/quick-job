@@ -8,26 +8,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        green: {
-          90: "#0D4329",
-          50: "#0D4329",
-          10: "#0D4329",
-        },
-        orange: {
-          90: "#AE3905",
-          50: "#AE3905",
-          10: "#AE3905",
-        },
-        red: {
-          90: "#5E1528",
-          50: "#5E1528",
-          10: "#5E1528",
-        },
-        chici: {
-          90: "#FF4E64",
-          50: "#FF4E64",
-          10: "#FF4E64",
-        },
+        dark: "#3C3744",
+        yellow: "#EECB55",
+        pink: "#FB5D64",
+        cell: "#46DBC9",
         goku: "#F5F5F5",
         gohan: "#FFFFFF",
         bulma: "#0C0B0B",
