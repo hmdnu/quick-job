@@ -7,6 +7,7 @@ import { Home, RootLayout, SignIn } from "./views";
 import CreateVacancy from "./views/CreateVacancy";
 import ErrorPage from "./views/ErrorPage";
 import MobileChat from "./views/MobileChat";
+import MyPost from "./views/MyPost";
 import Riwayat from "./views/Riwayat";
 import SignUp from "./views/SignUp";
 
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "/riwayat",
         element: <Riwayat />,
+      },
+      {
+        path: "/postingan-saya",
+        element: <MyPost />,
       },
       {
         path: "/chat",

@@ -95,7 +95,7 @@ const Riwayat = () => {
               <div className="flex flexEnd gap-[10px] md:mt-[20px]">
                 <button
                   onClick={() => handleCancelJob(job.key)}
-                  className={`btn-md-fill text-sm-s bg-red-90 text-white hover:text-red-90 focus:text-red-90 
+                  className={`btn-md-fill text-sm-s bg-pink text-dark 
                     ${
                       job.status === "complete" || job.status === "cancelled"
                         ? "hidden"
@@ -120,7 +120,7 @@ const Riwayat = () => {
                   </svg>
                 </button>
                 <button
-                  className={`btn-md-fill text-sm-s bg-blue-90 text-white hover:text-blue focus:text-blue ${
+                  className={`btn-md-fill text-sm-s bg-yellow text-dark ${
                     job.status === "complete" || job.status === "cancelled"
                       ? "hidden"
                       : "flex"
@@ -144,7 +144,7 @@ const Riwayat = () => {
                 </button>
                 <button
                   onClick={() => handleCompleteJob(job.key)}
-                  className={`btn-md-fill text-sm-s bg-dark text-white hover:text-dark focus:text-dark 
+                  className={`btn-md-fill text-sm-s bg-cell text-dark
                     ${
                       job.status === "complete" || job.status === "cancelled"
                         ? "hidden"

@@ -65,6 +65,7 @@ export const DUMMY_VACANCY = [
     desc: "Titip belikan makaroni ngehe hehehe, kirim ke gedung AX Polinema ya ! Rincian: Level 1 nya 2 Level 2 nya 1 Level 3 nya gak level :P Kalau kurang jelas bisa tanya duluu yaa lewat chatt Mwakasiii",
     location: "Lowokwaru, Malang",
     status: "ongoing",
+    date: "19 Juni 2024",
   },
   {
     key: 1,
@@ -77,6 +78,7 @@ export const DUMMY_VACANCY = [
     desc: "Butuh seseorang yang ngelesin gue matematika materi gauss...",
     location: "Dinoyo, Malang",
     status: "complete",
+    date: "19 Januari 2005",
   },
 ];
 

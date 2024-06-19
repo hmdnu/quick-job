@@ -76,8 +76,8 @@ export default function SignUp() {
       <div className="grid md:flex gap-[50px]">
         <div className="hidden md:flex">
           <img
-            src="/img/larry-sign.svg"
-            alt="larry-sign"
+            src="/img/grape-sign.svg"
+            alt="grape-sign"
             className="md:w-[300px] lg:w-full"
           />
         </div>
@@ -107,8 +107,8 @@ export default function SignUp() {
             </h1>
             <div className="flex justify-end">
               <img
-                src="/img/larry-sign.svg"
-                alt="larry-sign"
+                src="/img/grape-sign.svg"
+                alt="grape-sign"
                 className="md:hidden h-[300px] mb-[5px]"
               />
             </div>
