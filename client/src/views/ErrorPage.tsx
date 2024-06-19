@@ -3,7 +3,7 @@ const ErrorPage = () => {
     <section className="grid h-dvh content-center p-10 md:p-0">
       <div className="mx-auto">
         <img
-          src="/img/larry-404.svg"
+          src="/img/grape-error.svg"
           alt="404 Not Found"
           className="size-[400px]"
         />

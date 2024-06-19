@@ -150,8 +150,8 @@ export default function CreateVacancy() {
                   value={time.label}
                   className={`border-none rounded-lg bg-opacity-20 px-2 py-1 lg:border-none lg:rounded-lg lg:bg-opacity-20 lg:px-3 lg:py-1 hover:cursor-pointer ${
                     activeButtons?.deadline === i
-                      ? "bg-dark text-dark"
-                      : "bg-blue-90 text-blue"
+                      ? "bg-cell text-cell"
+                      : "bg-dark text-dark"
                   } text-sm font-bold`}
                 />
               ))}
@@ -188,10 +188,10 @@ export default function CreateVacancy() {
                     setValue("payment", payment.label);
                     setActiveButtons((prev) => ({ ...prev, payment: i }));
                   }}
-                  className={`flex flexCenter border-none rounded-lg px-3 py-2 text-sm-s font-semibold gap-2 ${
+                  className={`flex flexCenter bg-opacity-20 border-none rounded-lg px-3 py-2 text-sm font-bold gap-2 ${
                     activeButtons?.payment !== i
-                      ? "bg-dark0 text-white"
-                      : "bg-slate-200 text-dark0"
+                      ? "bg-dark text-dark"
+                      : "bg-cell text-cell"
                   }`}
                 >
                   {payment.label}
