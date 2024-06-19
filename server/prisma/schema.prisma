@@ -24,7 +24,8 @@ model User {
   createdAt DateTime @default(now())
   isWorker Boolean @default(false)
   posts Post[]
-  jobs Job[]
+  jobs Job? @relation("client")
+  ongoingJob Job? @relation("worker")
 }
 
 model Post{
@@ -46,11 +47,11 @@ model Job {
   id String @unique
   isDone Boolean @default(false)
   clientId String @unique
-  jobId String @unique
+  client User @relation(name: "client", fields: [clientId], references: [id])
   postId String @unique
   post Post @relation(fields: [postId], references: [id])
   workerId String @unique
-  worker User @relation(fields: [workerId], references: [id])
+  worker User @relation(name: "worker",fields: [workerId], references: [id])
 }
 
 enum POST_STATUS {
@@ -64,5 +65,3 @@ enum PAYMENT {
   CASH
   TRANSFER
 }
-
-

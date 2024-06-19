@@ -16,3 +16,8 @@ delete from post;
 desc post;
 
 ALTER TABLE post DROP INDEX Post_creatorId_key;
+
+
+desc job;
+
+alter table job drop column jobId;
