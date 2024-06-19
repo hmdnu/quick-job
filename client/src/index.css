@@ -112,7 +112,7 @@ body {
   }
 
   .btn-active {
-    @apply bg-white text-green-90;
+    @apply bg-white text-dark;
   }
 
   .translateOpen {

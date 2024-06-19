@@ -102,7 +102,7 @@ export default function SignUp() {
             </svg>
           </div>
           <div className="flex items-start justify-between max-w-sm mx-auto mt-3">
-            <h1 className="text-5xl-s md:text-8xl-s text-green-90 lg:mt-[5px]">
+            <h1 className="text-5xl-s md:text-8xl-s text-dark lg:mt-[5px]">
               Daftar <br className="md:hidden" /> kuy !
             </h1>
             <div className="flex justify-end">
@@ -118,7 +118,7 @@ export default function SignUp() {
             <div className="mb-5">
               <div className="flex gap-[10px] my-4">
                 <div className="w-full">
-                  <label className="block mb-2 text-sm-s md:text-md-s text-green-90">
+                  <label className="block mb-2 text-sm-s md:text-md-s text-dark">
                     Nama Awal
                   </label>
                   <input
@@ -132,7 +132,7 @@ export default function SignUp() {
                   </p>
                 </div>
                 <div className="w-full">
-                  <label className="block mb-2 text-sm-s md:text-md-s text-green-90">
+                  <label className="block mb-2 text-sm-s md:text-md-s text-dark">
                     Nama Akhir
                   </label>
                   <input
@@ -146,7 +146,7 @@ export default function SignUp() {
                   </p>
                 </div>
               </div>
-              <label className="block mb-2 text-sm-s md:text-md-s text-green-90">
+              <label className="block mb-2 text-sm-s md:text-md-s text-dark">
                 Email
               </label>
               <input
@@ -158,7 +158,7 @@ export default function SignUp() {
               <p className="text-red-600 text-sm">{errors.email?.message}</p>
             </div>
             <div className="mb-5">
-              <label className="block mb-2 text-sm-s md:text-md-s text-green-90">
+              <label className="block mb-2 text-sm-s md:text-md-s text-dark">
                 Username
               </label>
               <input
@@ -171,7 +171,7 @@ export default function SignUp() {
               <p className="text-red-600 text-sm">{errors.username?.message}</p>
             </div>
             <div className="mb-5">
-              <label className="block text-sm-s md:text-md-s mb-2 text-sm-r text-green-90">
+              <label className="block text-sm-s md:text-md-s mb-2 text-sm-r text-dark">
                 Kata Sandi
               </label>
               <input
@@ -199,7 +199,7 @@ export default function SignUp() {
               </a>
               <button
                 type="submit"
-                className="btn-sm-fill bg-green-90 text-white hover:text-green-90 focus:text-green-90 text-sm font-semibold"
+                className="btn-sm-fill bg-dark text-white hover:text-dark focus:text-dark text-sm font-semibold"
                 disabled={isPending}
               >
                 {isPending ? "Loading" : "Sign Up"}

@@ -9,7 +9,9 @@ export default function ModalConfim() {
       className="flex justify-center mx-auto items-center bg-[rgba(0,0,0,.5)] w-full h-screen fixed z-50 top-0 left-0 overflow-hidden"
     >
       <div className="grid justify-items-center gap-[30px] absolute bg-white p-6 w-[250px] sm:w-[350px] rounded-lg ">
-        <h1 className="text-center text-sm-s sm:text-md-s">Apakah anda yakin akan mengerjakan pekerjaan ini?</h1>
+        <h1 className="text-center text-sm-s sm:text-md-s">
+          Apakah anda yakin akan mengerjakan pekerjaan ini?
+        </h1>
         <div className="flex gap-3">
           <button className="btn-sm-fill md:btn-md-fill text-sm-s bg-red-90 text-white hover:text-red-90 focus:text-red-90">
             <span className="hidden lg:inline">Gak Dulu</span>
@@ -21,12 +23,16 @@ export default function ModalConfim() {
               stroke="current"
               className="lg:hidden size-6"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18 18 6M6 6l12 12"
+              />
             </svg>
           </button>
           <button
             onClick={setConfirm}
-            className="btn-sm-fill md:btn-md-fill text-sm-s bg-green-90 text-white hover:text-green-90 focus:text-green-90"
+            className="btn-sm-fill md:btn-md-fill text-sm-s bg-dark text-white hover:text-dark focus:text-dark"
           >
             <span className="hidden lg:inline">Gass</span>
             <svg
@@ -36,7 +42,12 @@ export default function ModalConfim() {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M5 13l4 4L19 7"
+              />
             </svg>
           </button>
         </div>

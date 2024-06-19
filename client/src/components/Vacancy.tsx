@@ -6,9 +6,9 @@ import { sortPostsByDate } from "../helpers";
 import formatCurrency from "../helpers/formatCurrency";
 import formatName from "../helpers/formatName";
 import { useGetPosts, useUpdatePost } from "../hooks/post";
-import { useStoreJobDetails, useStoreModalConfirmation, useStoreSearch } from "../hooks/zustand";
+import { useStoreJobDetails, useStoreSearch } from "../hooks/zustand";
 import { Post } from "../types";
-import ModalConfim from "./ModalConfim";
+import Empty from "./Empty";
 
 export default function Vacancy() {
   const getPosts = useGetPosts();
@@ -18,7 +18,7 @@ export default function Vacancy() {
   const [queryPost, setQueryPost] = useState<Post[]>([]);
 
   const { setShowJobDetails } = useStoreJobDetails();
-  const { isOpen, setOpenModal } = useStoreModalConfirmation();
+  // const { isOpen, setOpenModal } = useStoreModalConfirmation();
   const { posts: searchedPost } = useStoreSearch();
   const [isDescExpanded, setDescExpanded] = useState(false);
 
@@ -27,7 +27,10 @@ export default function Vacancy() {
   // Filter posts by canceled status
   useEffect(() => {
     const overduePosts = posts?.filter((post) => {
-      return moment().isAfter(post.deadline) && (post.status as string) !== POST_STATUS.CANCELED;
+      return (
+        moment().isAfter(post.deadline) &&
+        (post.status as string) !== POST_STATUS.CANCELED
+      );
     });
 
     if (overduePosts) {
@@ -77,12 +80,18 @@ export default function Vacancy() {
   }
 
   return (
-    <section className="mt-[100px] lg:mt-[120px] grid grid-cols-1 w-full md:w-[300px] lg:w-[350px] justify-items-center items-center md:flex md:justify-center lg:justify-start sm:grid-cols-2 md:grid-cols-1 h-full xl:ml-[100px] m-[20px] gap-[20px]">
+    <section className="grid justify-items-center items-center mx-auto gap-[20px]">
       <div className="grid w-full sm:w-[300px] lg:w-full md:inline-block gap-[20px]">
         {getPosts.isPending ? (
-          <div className="md:mb-[20px] max-w-sm p-4 gap-[10px]">Loading bro</div>
-        ) : posts.length === 0 ? (
-          <div className="md:mb-[20px] max-w-sm p-4 gap-[10px]">kosong</div>
+          <div className="md:mb-[20px] max-w-sm p-4 gap-[10px]">
+            Loading bro
+          </div>
+        ) : posts.filter(
+            (post) => (post.status as string) === POST_STATUS.IDLE
+          ) ? (
+          <div className="md:mb-[20px] max-w-sm p-4 gap-[10px]">
+            <Empty />
+          </div>
         ) : (
           queryPost
             ?.filter((post) => (post.status as string) === POST_STATUS.IDLE)
@@ -100,39 +109,54 @@ export default function Vacancy() {
                       className="w-[40px] h-[40px] lg:w-[50px] lg:h-[50px] rounded-full"
                     />
                     <div className="grid gap-1 items-center justify-start">
-                      <h1 className="text-bulma text-sm-s">{`${formatName(post.creator.firstname)} ${formatName(
-                        post.creator.lastname
-                      )}`}</h1>
+                      <h1 className="text-bulma text-sm-s">{`${formatName(
+                        post.creator.firstname
+                      )} ${formatName(post.creator.lastname)}`}</h1>
                       <div className="hidden bg-bulma h-1 w-1 rounded-full"></div>
-                      <h6 className="text-trunks text-xs-r">{moment(post.createdAt).fromNow()}</h6>
+                      <h6 className="text-trunks text-xs-r">
+                        {moment(post.createdAt).fromNow()}
+                      </h6>
                     </div>
                   </div>
-                  <div className="lg:hidden lg:mt-[20px] h-full inline-block rounded-lg bg-chici-90 bg-opacity-30 px-[6px] pt-[6px]">
-                    <h5 className="mb-2 text-sm-s text-chici-90">{moment(post.deadline).toNow(true)}</h5>
+                  <div className="lg:hidden lg:mt-[20px] h-full inline-block rounded-lg bg-cell-90 bg-opacity-30 px-[6px] pt-[6px]">
+                    <h5 className="mb-2 text-sm-s text-cell-90">
+                      {moment(post.deadline).toNow(true)}
+                    </h5>
                   </div>
                   <div className="hidden lg:flex">
                     <h1 className="text-lg-s">{formatCurrency(post.price)}</h1>
                   </div>
                 </div>
-                <div className="hidden mt-[20px] lg:inline-block rounded-lg bg-chici-90 bg-opacity-30 px-[6px] pt-[6px]">
-                  <h5 className="mb-2 text-sm-s text-chici-90">
+                {/* <div className="hidden mt-[20px] lg:inline-block rounded-lg bg-cell-90 bg-opacity-30 px-[6px] pt-[6px]">
+                  <h5 className="mb-2 text-sm-s text-cell-90">
                     {moment().isAfter(post.deadline)
                       ? "Kadaluarsa"
-                      : "Kadaluarsa dalam " + moment(post.deadline).toNow(true)}
+                      : "Lowongan ini akan hilang dalam " +
+                        moment(post.deadline).toNow(true)}
                   </h5>
-                </div>
+                </div> */}
                 <div className="grid mt-[10px] gap-[10px] md:gap-0">
-                  <h1 className="text-sm-s md:text-md-s text-bulma">{post.title}</h1>
-                  <p id="description" className="truncate ... text-xs-r md:text-sm-r text-trunks">
+                  <h1 className="text-sm-s md:text-md-s text-bulma">
+                    {post.title}
+                  </h1>
+                  <p
+                    id="description"
+                    className="truncate ... text-xs-r md:text-sm-r text-trunks"
+                  >
                     {post.desc}
                   </p>
-                  <div onClick={handleDescExpanded} className="flex md:hidden text-xs-r text-green-90">
+                  <div
+                    onClick={handleDescExpanded}
+                    className="flex md:hidden text-xs-r text-dark"
+                  >
                     {isDescExpanded ? "Read Less" : "Read More"}
                   </div>
-                  <span className="text-xs-r md:text-sm-r text-trunks">{post.address}</span>
+                  <span className="text-xs-r md:text-sm-r text-trunks">
+                    {post.address}
+                  </span>
                 </div>
-                <div className="mt-[10px] flex justify-end gap-[5px]">
-                  <button className="btn-sm-fill rounded-full bg-orange-90 text-white hover:text-orange-90 focus:text-orange-90 text-sm font-semibold">
+                {/* <div className="mt-[10px] flex justify-end gap-[5px]">
+                  <button className="btn-sm-fill rounded-full bg-blue-90 text-white hover:text-blue focus:text-blue text-sm font-semibold">
                     <span className="hidden lg:inline">Hubungi Klien</span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -151,7 +175,7 @@ export default function Vacancy() {
                   </button>
                   <button
                     onClick={setOpenModal}
-                    className="btn-sm-fill bg-green-90 text-white hover:text-green-90 focus:text-green-90 text-sm font-semibold"
+                    className="btn-sm-fill bg-dark text-white hover:text-dark focus:text-dark text-sm font-semibold"
                   >
                     <span className="hidden lg:inline">Kerjakan</span>
                     <svg
@@ -161,11 +185,16 @@ export default function Vacancy() {
                       viewBox="0 0 24 24"
                       stroke="currentColor"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M5 13l4 4L19 7"
+                      />
                     </svg>
                   </button>
                   {isOpen && <ModalConfim />}
-                </div>
+                </div> */}
               </div>
             ))
         )}

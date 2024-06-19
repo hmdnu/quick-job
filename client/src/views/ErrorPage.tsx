@@ -8,8 +8,8 @@ const ErrorPage = () => {
           className="size-[400px]"
         />
         <div className="grid justify-items-center md:justify-items-start">
-          <h1 className="text-5xl-s text-green-90">Ooops !</h1>
-          <p className="text-green-90 text-xl-s">Halaman tidak tersedia</p>
+          <h1 className="text-5xl-s text-dark">Ooops !</h1>
+          <p className="text-dark text-xl-s">Halaman tidak tersedia</p>
         </div>
       </div>
     </section>
