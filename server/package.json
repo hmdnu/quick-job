@@ -3,7 +3,7 @@
     "dev": "bun run --hot src/server.ts"
   },
   "dependencies": {
-    "@prisma/client": "5.15.1",
+    "@prisma/client": "^5.15.1",
     "@types/uuid": "^9.0.8",
     "hono": "^4.4.2",
     "http-status-codes": "^2.3.0",

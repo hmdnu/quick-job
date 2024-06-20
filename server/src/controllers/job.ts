@@ -8,39 +8,38 @@ import { STATUS } from "@/constant";
 export async function handleCreateJob(c: Context) {
   const postId = c.req.query("postId");
   const clientId = c.req.query("clientId");
+  const workerId = c.req.query("workerId");
 
   try {
-    // const post = await prisma.job.create({
-    //   data: {
-    //     id: uuid(),
-    //     client: {
-    //       connect: {
-    //         id: clientId,
-    //       },
-    //     },
-    //     post: {
-    //       connect: {
-    //         id: postId,
-    //       },
-    //     },
-    //   },
-    //   include: {
-    //     client: true,
-    //     post: true,
-    //   },
-    // });
+    const newJob = await prisma.job.create({
+      data: {
+        id: uuid(),
+        client: {
+          connect: {
+            id: clientId,
+          },
+        },
+        post: {
+          connect: {
+            id: postId,
+          },
+        },
+        worker: {
+          connect: {
+            id: workerId,
+          },
+        },
+      },
+      include: {
+        client: true,
+        post: true,
+        worker: true,
+      },
+    });
 
-    // await prisma.post.update({
-
-    //   data : {
-    //     status : STATUS.ONGOING,
-
-    //   }
-
-    // })
-
-    return c.json("", http.OK);
+    return c.json({ newJob, message: "job created" }, http.OK);
   } catch (error) {
+    console.log(error);
     if (error instanceof PrismaClientKnownRequestError) {
       c.json({ message: error.message }, http.INTERNAL_SERVER_ERROR);
     }
@@ -67,4 +66,10 @@ export async function handleUpdateJobStatus(c: Context) {
       return c.json({ message: error.message }, http.INTERNAL_SERVER_ERROR);
     }
   }
+}
+
+export async function handleGetJobs(c: Context) {
+  try {
+    const jobs = await prisma.job.findMany();
+  } catch (error) {}
 }

@@ -101,3 +101,13 @@ export async function handleGetUser(c: Context) {
     }
   }
 }
+
+export async function handleGetUsers(c: Context) {
+  try {
+    const users = await prisma.user.findMany();
+
+    return c.json(users, http.OK);
+  } catch (error) {
+    return c.json({ message: error }, http.INTERNAL_SERVER_ERROR);
+  }
+}

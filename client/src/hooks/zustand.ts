@@ -20,6 +20,11 @@ interface Search {
   setPosts: (posts: string) => void;
 }
 
+interface UpdateDetailJob {
+  isEmpty: boolean;
+  setUpdateIsEmpty: () => void;
+}
+
 export const useStoreJobDetails = create<ShowJobDetails>((set) => ({
   isShowJobDetails: false,
   jobContent: null,
@@ -37,4 +42,9 @@ export const useStoreModalConfirmation = create<ModalConfirmation>((set) => ({
 export const useStoreSearch = create<Search>((set) => ({
   posts: "",
   setPosts: (posts) => set({ posts }),
+}));
+
+export const useStoreUpdateDetailJob = create<UpdateDetailJob>((set) => ({
+  isEmpty: false,
+  setUpdateIsEmpty: () => set({ isEmpty: true }),
 }));

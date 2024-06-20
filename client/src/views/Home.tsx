@@ -8,16 +8,11 @@ export default function Home() {
   }, []);
 
   return (
-    <>
-      <section className="flex">
-        <div className="mr-[20px]">
-          <Vacancy />
-        </div>
-        {/* <DetailVacancy /> */}
-        <div className="hidden sm:flex">
-          <Chat />
-        </div>
-      </section>
-    </>
+    <main className="mt-[120px] w-fit m-auto">
+      <Vacancy />
+      <div className="hidden sm:flex">
+        <Chat />
+      </div>
+    </main>
   );
 }
