@@ -8,15 +8,8 @@ const DetailVacancy = () => {
 
   return (
     <>
-      {!isShowJobDetails ? (
-        <section className="sticky z-10 mt-[100px] lg:mt-[120px] md:mr-[20px] md:basis-3/5 lg:basis-2/5 hidden h-full md:grid">
-          <div className="grid justify-items-center py-[20px] bg-white border border-gray-200 rounded-lg shadow">
-            <h1 className="text-center text-green-90 text-2xl-s">Tampilkan Detail Pekerjaan Disini</h1>
-            <img src="/img/larry-home.svg" alt="larry-home" />
-          </div>
-        </section>
-      ) : (
-        <section className="sticky z-10 mt-[100px] lg:mt-[120px] md:mr-[20px] top-[120px] md:basis-3/5 lg:basis-2/5 p-[20px] hidden h-full md:grid border border-gray-200 rounded-lg shadow">
+      <section className="mt-[120px] flex justify-center">
+        <div className="md:w-[55%] w-[90%] mr-0 lg:mr-28 p-[20px] border border-gray-200 rounded-lg shadow">
           <div className="grid justify-items-start">
             <div className="flex flexCenter gap-[10px]">
               <img
@@ -32,8 +25,8 @@ const DetailVacancy = () => {
                 <h6 className="text-trunks text-xs-r">{moment(jobContent?.createdAt).fromNow()}</h6>
               </div>
             </div>
-            <div className="hidden mt-[20px] lg:inline-block rounded-lg bg-chici-90 bg-opacity-30 px-[6px] pt-[6px]">
-              <h5 className="mb-2 text-sm-s text-chici-90">
+            <div className="hidden mt-[20px] lg:inline-block rounded-lg bg-cell-90 bg-opacity-30 px-[6px] pt-[6px]">
+              <h5 className="mb-2 text-sm-s text-cell-90">
                 {" "}
                 {moment().isAfter(jobContent?.deadline)
                   ? "Kadaluarsa"
@@ -84,7 +77,7 @@ const DetailVacancy = () => {
             <p className="text-sm-r md:text-md-r text-trunks">{jobContent?.desc}</p>
           </div>
           <div className="mt-[20px] flex justify-end gap-[5px]">
-            <button className="btn-sm-fill rounded-full bg-orange-90 text-white hover:text-orange-90 focus:text-orange-90 text-sm font-semibold">
+            <button className="btn-sm-fill rounded-full bg-blue-90 text-white hover:text-blue focus:text-blue text-sm font-semibold">
               <span className="hidden md:inline">Hubungi Klien</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -103,7 +96,7 @@ const DetailVacancy = () => {
             </button>
             <button
               onClick={setOpenModal}
-              className="btn-sm-fill bg-green-90 text-white hover:text-green-90 focus:text-green-90 text-sm font-semibold"
+              className="btn-sm-fill bg-dark text-white hover:text-dark focus:text-dark text-sm font-semibold"
             >
               <span className="hidden md:inline">Kerjakan</span>
               <svg
@@ -117,8 +110,8 @@ const DetailVacancy = () => {
               </svg>
             </button>
           </div>
-        </section>
-      )}
+        </div>
+      </section>
     </>
   );
 };

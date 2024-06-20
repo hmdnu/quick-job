@@ -12,6 +12,9 @@ update post set status = "ONGOING" where status = "CANCELED";
 
 delete from user;
 delete from post;
+SELECT * from post;
+
+DELETE from job;
 
 desc post;
 
@@ -21,3 +24,5 @@ ALTER TABLE post DROP INDEX Post_creatorId_key;
 desc job;
 
 alter table job drop column jobId;
+
+

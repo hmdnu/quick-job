@@ -1,18 +1,20 @@
-import { Link } from "react-router-dom";
-import { PAYMENT_METHOD, TIME_BUTTON } from "../constant";
-import { useForm } from "react-hook-form";
-import { NewPost, Token } from "../types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { postSchema } from "../schemas";
-import { useCreatePost } from "../hooks/post";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
 import { jwtDecode } from "jwt-decode";
+import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import { PAYMENT_METHOD, TIME_BUTTON } from "../constant";
 import formatToISO from "../helpers/formatDate";
+import { useCreatePost } from "../hooks/post";
+import { postSchema } from "../schemas";
+import { NewPost, Token } from "../types";
 
 export default function CreateVacancy() {
-  const [activeButtons, setActiveButtons] = useState<{ payment?: number; deadline?: number }>();
+  const [activeButtons, setActiveButtons] = useState<{
+    payment?: number;
+    deadline?: number;
+  }>();
   const navigate = useNavigate();
   const [cookies] = useCookies(["access-token"]);
 
@@ -26,7 +28,8 @@ export default function CreateVacancy() {
     resolver: zodResolver(postSchema),
   });
 
-  const { mutate, isPending, error, data, isError, isSuccess } = useCreatePost();
+  const { mutate, isPending, error, data, isError, isSuccess } =
+    useCreatePost();
 
   const onSubmit = (formData: NewPost) => {
     if (cookies["access-token"]) {
@@ -56,10 +59,15 @@ export default function CreateVacancy() {
 
   return (
     <section className="mt-[70px] md:mt-[100px] lg:ml-[180px] p-6 md:p-10">
-      <form onSubmit={handleSubmit(onSubmit)} className="max-w-screen-md md:flex justify-between gap-5">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="max-w-screen-md md:flex justify-between gap-5"
+      >
         <div className="grid mb-5 w-full h-full gap-[10px]">
           <div>
-            <label className="block mb-2 text-sm-s md:text-md-s text-green-90">Judul</label>
+            <label className="block mb-2 text-sm-s md:text-md-s text-dark">
+              Judul
+            </label>
             <input
               type="text"
               className="w-full py-[8px] px-[12px] text-xs-r md:text-sm-r rounded-lg border-2 border-goku focus:outline-none"
@@ -69,7 +77,9 @@ export default function CreateVacancy() {
             <p className="text-red-500 text-sm">{errors.title?.message}</p>
           </div>
           <div>
-            <label className="block mb-2 text-sm-s md:text-md-s text-green-90">Alamat tempat tinggal</label>
+            <label className="block mb-2 text-sm-s md:text-md-s text-dark">
+              Alamat tempat tinggal
+            </label>
             <input
               type="text"
               className="w-full py-[8px] px-[12px] text-xs-r md:text-sm-r rounded-lg border-2 border-goku focus:outline-none"
@@ -79,7 +89,9 @@ export default function CreateVacancy() {
             <p className="text-red-500 text-sm">{errors.address?.message}</p>
           </div>
           <div>
-            <label className="block mb-2 text-sm-s md:text-md-s text-green-90">Deskripsi Pekerjaan</label>
+            <label className="block mb-2 text-sm-s md:text-md-s text-dark">
+              Deskripsi Pekerjaan
+            </label>
             <textarea
               id="desc"
               className="w-full h-[80px] py-[8px] px-[12px] text-xs-r md:text-sm-r rounded-lg border-2 border-goku focus:outline-none"
@@ -123,7 +135,9 @@ export default function CreateVacancy() {
         </div>
         <div className="grid mb-5 w-full gap-[10px]">
           <div>
-            <label className="block mb-2 text-sm-s md:text-md-s text-green-90">Mau nunggu sampai kapan ?</label>
+            <label className="block mb-2 text-sm-s md:text-md-s text-dark">
+              Mau nunggu sampai kapan ?
+            </label>
             <div className="flex flex-wrap gap-2">
               {TIME_BUTTON.map((time, i) => (
                 <input
@@ -135,18 +149,23 @@ export default function CreateVacancy() {
                   type="button"
                   value={time.label}
                   className={`border-none rounded-lg bg-opacity-20 px-2 py-1 lg:border-none lg:rounded-lg lg:bg-opacity-20 lg:px-3 lg:py-1 hover:cursor-pointer ${
-                    activeButtons?.deadline === i ? "bg-green-90 text-green-90" : "bg-orange-90 text-orange-90"
+                    activeButtons?.deadline === i
+                      ? "bg-dark text-dark"
+                      : "bg-blue-90 text-blue"
                   } text-sm font-bold`}
                 />
               ))}
             </div>
             <p className="mt-[5px] text-2xs-r text-trunks">
-              * setelah waktu yang dipilih habis, lowongan yang anda buat akan otomatis menghilang.
+              * setelah waktu yang dipilih habis, lowongan yang anda buat akan
+              otomatis menghilang.
             </p>
           </div>
           <p className="text-red-500 text-sm">{errors.deadline?.message}</p>
           <div>
-            <label className="block mb-2 text-sm-s md:text-md-s text-green-90">Mau bayar berapa bro ?</label>
+            <label className="block mb-2 text-sm-s md:text-md-s text-dark">
+              Mau bayar berapa bro ?
+            </label>
             <input
               type="text"
               id="sallary"
@@ -157,7 +176,9 @@ export default function CreateVacancy() {
             <p className="text-red-500 text-sm">{errors.price?.message}</p>
           </div>
           <div>
-            <label className="block mb-2 text-sm-s md:text-md-s text-green-90">Metode Pembayaran</label>
+            <label className="block mb-2 text-sm-s md:text-md-s text-dark">
+              Metode Pembayaran
+            </label>
             <div className="flex gap-[10px]">
               {PAYMENT_METHOD.map((payment, i) => (
                 <button
@@ -168,7 +189,9 @@ export default function CreateVacancy() {
                     setActiveButtons((prev) => ({ ...prev, payment: i }));
                   }}
                   className={`flex flexCenter border-none rounded-lg px-3 py-2 text-sm-s font-semibold gap-2 ${
-                    activeButtons?.payment !== i ? "bg-green-900 text-white" : "bg-slate-200 text-green-900"
+                    activeButtons?.payment !== i
+                      ? "bg-dark0 text-white"
+                      : "bg-slate-200 text-dark0"
                   }`}
                 >
                   {payment.label}
@@ -178,7 +201,7 @@ export default function CreateVacancy() {
           </div>
           <p className="text-sm text-red-500">{errors.payment?.message}</p>
           <div className="flex flexEnd mt-[35px]">
-            <button className="btn-md-fill text-md-s bg-green-90 text-white hover:text-green-90 focus:text-green-90">
+            <button className="btn-md-fill text-md-s bg-dark text-white hover:text-dark focus:text-dark">
               {isPending ? "Loading" : "Buat lowongan"}
             </button>
           </div>

@@ -6,9 +6,16 @@ import { sortPostsByDate } from "../helpers";
 import formatCurrency from "../helpers/formatCurrency";
 import formatName from "../helpers/formatName";
 import { useGetPosts, useUpdatePost } from "../hooks/post";
-import { useStoreJobDetails, useStoreModalConfirmation, useStoreSearch } from "../hooks/zustand";
+import {
+  useStoreJobDetails,
+  useStoreModalConfirmation,
+  useStoreSearch,
+  useStoreUpdateDetailJob,
+} from "../hooks/zustand";
 import { Post } from "../types";
+import Empty from "./Empty";
 import ModalConfim from "./ModalConfim";
+import { useNavigate } from "react-router-dom";
 
 export default function Vacancy() {
   const getPosts = useGetPosts();
@@ -16,14 +23,16 @@ export default function Vacancy() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [postToUpdate, setPostToUpdate] = useState<Post[]>([]);
   const [queryPost, setQueryPost] = useState<Post[]>([]);
-
-  const { setShowJobDetails } = useStoreJobDetails();
-  const { isOpen, setOpenModal } = useStoreModalConfirmation();
-  const { posts: searchedPost } = useStoreSearch();
   const [isDescExpanded, setDescExpanded] = useState(false);
 
-  moment.locale("id");
+  const { setShowJobDetails } = useStoreJobDetails();
+  // const { isOpen, setOpenModal } = useStoreModalConfirmation();
+  const { posts: searchedPost } = useStoreSearch();
+  const { setUpdateIsEmpty } = useStoreUpdateDetailJob();
 
+  const naviate = useNavigate();
+
+  moment.locale("id");
   // Filter posts by canceled status
   useEffect(() => {
     const overduePosts = posts?.filter((post) => {
@@ -72,67 +81,86 @@ export default function Vacancy() {
   }, [searchedPost, posts]);
 
   function handleDescExpanded() {
-    setDescExpanded((prev: any) => !prev);
+    setDescExpanded((prev) => !prev);
     document.getElementById("description")?.classList.toggle("truncate");
   }
 
+  useEffect(() => {
+    const jobIsEmpty = posts.filter((post) => (post.status as string) === POST_STATUS.IDLE);
+    // setUpdateIsEmpty(jobIsEmpty);
+  }, [posts]);
+
   return (
-    <section className="mt-[100px] lg:mt-[120px] grid grid-cols-1 w-full md:w-[300px] lg:w-[350px] justify-items-center items-center md:flex md:justify-center lg:justify-start sm:grid-cols-2 md:grid-cols-1 h-full xl:ml-[100px] m-[20px] gap-[20px]">
-      <div className="grid w-full sm:w-[300px] lg:w-full md:inline-block gap-[20px]">
+    <>
+      <div className="">
         {getPosts.isPending ? (
-          <div className="md:mb-[20px] max-w-sm p-4 gap-[10px]">Loading bro</div>
-        ) : posts.length === 0 ? (
-          <div className="md:mb-[20px] max-w-sm p-4 gap-[10px]">kosong</div>
+          <div>Loading bro</div>
+        ) : // Check if there are any posts with status IDLE
+        posts.filter((post) => (post.status as string) === POST_STATUS.IDLE).length === 0 ? (
+          <div className="">
+            <Empty />
+          </div>
         ) : (
-          queryPost
-            ?.filter((post) => (post.status as string) === POST_STATUS.IDLE)
-            .map((post) => (
-              <div
-                key={post.id}
-                onClick={() => setShowJobDetails(post)}
-                className="cursor-pointer md:mb-[20px] max-w-sm p-4 gap-[10px] bg-white border border-gray-200 rounded-lg shadow"
-              >
-                <div className="flex justify-between">
-                  <div className="flex flexCenter gap-[10px]">
-                    <img
-                      src={"/img/user2.jpg"}
-                      alt="user"
-                      className="w-[40px] h-[40px] lg:w-[50px] lg:h-[50px] rounded-full"
-                    />
-                    <div className="grid gap-1 items-center justify-start">
-                      <h1 className="text-bulma text-sm-s">{`${formatName(post.creator.firstname)} ${formatName(
-                        post.creator.lastname
-                      )}`}</h1>
-                      <div className="hidden bg-bulma h-1 w-1 rounded-full"></div>
-                      <h6 className="text-trunks text-xs-r">{moment(post.createdAt).fromNow()}</h6>
+          <div className="grid md:grid-cols-2 grid-cols-1 gap-x-5 max-md:gap-5 justify-center md:mr-24 mr-0">
+            {queryPost
+              ?.filter((post) => (post.status as string) === POST_STATUS.IDLE)
+              .map((post) => (
+                <div
+                  key={post.id}
+                  onClick={() => {
+                    setShowJobDetails(post);
+                    naviate("/detail-job/" + post.id);
+                  }}
+                  // cursor-pointer md:mb-[20px] max-w-sm p-4 gap-[10px] bg-white border border-gray-200 rounded-lg shadow
+                  className="cursor-pointer md:mb-5 max-w-sm gap-[10px] p-4 bg-white border border-gray-200 rounded-lg shadow w-[400px] max-h-[200px] place-content-center mx-auto hover:bg-slate-200 transition"
+                >
+                  <div className="flex justify-between">
+                    <div className="flex items-center gap-2.5">
+                      <img src="/img/user2.jpg" alt="user" className="w-10 h-10 lg:w-12 lg:h-12 rounded-full" />
+                      <div className="grid gap-1 items-center">
+                        <h1 className="text-bulma text-sm-s">{`${formatName(post.creator.firstname)} ${formatName(
+                          post.creator.lastname
+                        )}`}</h1>
+                        <div className="hidden bg-bulma h-1 w-1 rounded-full"></div>
+                        <h6 className="text-trunks text-xs-r">{moment(post.createdAt).fromNow()}</h6>
+                      </div>
+                    </div>
+                    <div className="lg:hidden lg:mt-5 h-full inline-block rounded-lg bg-cell-90 bg-opacity-30 px-1.5 pt-1.5">
+                      <h5 className="mb-2 text-sm-s text-cell-90">{moment(post.deadline).toNow(true)}</h5>
+                    </div>
+                    <div className="hidden lg:flex">
+                      <h1 className="text-lg-s">{formatCurrency(post.price)}</h1>
                     </div>
                   </div>
-                  <div className="lg:hidden lg:mt-[20px] h-full inline-block rounded-lg bg-chici-90 bg-opacity-30 px-[6px] pt-[6px]">
-                    <h5 className="mb-2 text-sm-s text-chici-90">{moment(post.deadline).toNow(true)}</h5>
+                  <div className="hidden mt-5 lg:inline-block rounded-lg bg-cell-90 bg-opacity-30 px-1.5 pt-1.5">
+                    <h5 className="mb-2 text-sm-s text-cell-90">
+                      {moment().isAfter(post.deadline)
+                        ? "Kadaluarsa"
+                        : "Lowongan ini akan hilang dalam " + moment(post.deadline).toNow(true)}
+                    </h5>
                   </div>
-                  <div className="hidden lg:flex">
-                    <h1 className="text-lg-s">{formatCurrency(post.price)}</h1>
-                  </div>
-                </div>
-                <div className="hidden mt-[20px] lg:inline-block rounded-lg bg-chici-90 bg-opacity-30 px-[6px] pt-[6px]">
-                  <h5 className="mb-2 text-sm-s text-chici-90">
-                    {moment().isAfter(post.deadline)
-                      ? "Kadaluarsa"
-                      : "Kadaluarsa dalam " + moment(post.deadline).toNow(true)}
-                  </h5>
-                </div>
-                <div className="grid mt-[10px] gap-[10px] md:gap-0">
-                  <h1 className="text-sm-s md:text-md-s text-bulma">{post.title}</h1>
-                  <p id="description" className="truncate ... text-xs-r md:text-sm-r text-trunks">
-                    {post.desc}
-                  </p>
-                  <div onClick={handleDescExpanded} className="flex md:hidden text-xs-r text-green-90">
+                  <div className="grid mt-2.5 gap-2.5 md:gap-0">
+                    <h1 className="text-sm-s md:text-md-s text-bulma">{post.title}</h1>
+                    <p id="description" className="truncate text-xs-r md:text-sm-r text-trunks">
+                      {post.desc}
+                    </p>
+                    {/* <div onClick={handleDescExpanded} className="flex md:hidden text-xs-r text-dark">
                     {isDescExpanded ? "Read Less" : "Read More"}
+                  </div> */}
+                    <span className="truncate text-xs-r md:text-sm-r text-trunks">{post.address}</span>
                   </div>
-                  <span className="text-xs-r md:text-sm-r text-trunks">{post.address}</span>
+                  <div className="mt-2.5 flex justify-end gap-1.25"></div>
                 </div>
-                <div className="mt-[10px] flex justify-end gap-[5px]">
-                  <button className="btn-sm-fill rounded-full bg-orange-90 text-white hover:text-orange-90 focus:text-orange-90 text-sm font-semibold">
+              ))}
+          </div>
+        )}
+      </div>
+    </>
+  );
+}
+
+{
+  /* <button className="btn-sm-fill rounded-full bg-blue-90 text-white hover:text-blue focus:text-blue text-sm font-semibold">
                     <span className="hidden lg:inline">Hubungi Klien</span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -151,7 +179,7 @@ export default function Vacancy() {
                   </button>
                   <button
                     onClick={setOpenModal}
-                    className="btn-sm-fill bg-green-90 text-white hover:text-green-90 focus:text-green-90 text-sm font-semibold"
+                    className="btn-sm-fill bg-dark text-white hover:text-dark focus:text-dark text-sm font-semibold"
                   >
                     <span className="hidden lg:inline">Kerjakan</span>
                     <svg
@@ -164,12 +192,5 @@ export default function Vacancy() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                     </svg>
                   </button>
-                  {isOpen && <ModalConfim />}
-                </div>
-              </div>
-            ))
-        )}
-      </div>
-    </section>
-  );
+                  {isOpen && <ModalConfim />} */
 }

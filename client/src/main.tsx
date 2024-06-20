@@ -9,6 +9,7 @@ import ErrorPage from "./views/ErrorPage";
 import MobileChat from "./views/MobileChat";
 import Riwayat from "./views/Riwayat";
 import SignUp from "./views/SignUp";
+import DetailVacancy from "./views/DetailVacancy";
 
 const router = createBrowserRouter([
   {
@@ -28,9 +29,14 @@ const router = createBrowserRouter([
         path: "/riwayat",
         element: <Riwayat />,
       },
+
       {
         path: "/chat",
         element: <MobileChat />,
+      },
+      {
+        path: "/detail-job/:postId",
+        element: <DetailVacancy />,
       },
     ],
   },

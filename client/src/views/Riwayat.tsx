@@ -40,10 +40,10 @@ const Riwayat = () => {
 
   return (
     <section className="grid mt-[100px] md:mt-[120px] lg:ml-[100px] gap-[20px] px-6">
-      <div className="flex mx-auto md:mx-0 p-2 text-white text-sm-s rounded-lg w-[286px] bg-green-90">
+      <div className="flex mx-auto md:mx-0 p-2 text-white text-sm-s rounded-lg w-[286px] bg-dark">
         <button
           onClick={() => setSelectedSegment(1)}
-          className={`btn-md-fill focus:bg-white focus:text-green-90
+          className={`btn-md-fill focus:bg-white focus:text-dark
             ${selectedSegment === 1 ? "btn-active" : ""}
             `}
         >
@@ -51,7 +51,7 @@ const Riwayat = () => {
         </button>
         <button
           onClick={() => setSelectedSegment(2)}
-          className={`btn-md-fill focus:bg-white focus:text-green-90
+          className={`btn-md-fill focus:bg-white focus:text-dark
             ${selectedSegment === 2 ? "btn-active" : ""}
             `}
         >
@@ -59,7 +59,7 @@ const Riwayat = () => {
         </button>
         <button
           onClick={() => setSelectedSegment(3)}
-          className={`btn-md-fill focus:bg-white focus:text-green-90
+          className={`btn-md-fill focus:bg-white focus:text-dark
             ${selectedSegment === 3 ? "btn-active" : ""}
             `}
         >
@@ -120,7 +120,7 @@ const Riwayat = () => {
                   </svg>
                 </button>
                 <button
-                  className={`btn-md-fill text-sm-s bg-orange-90 text-white hover:text-orange-90 focus:text-orange-90 ${
+                  className={`btn-md-fill text-sm-s bg-blue-90 text-white hover:text-blue focus:text-blue ${
                     job.status === "complete" || job.status === "cancelled"
                       ? "hidden"
                       : "flex"
@@ -144,7 +144,7 @@ const Riwayat = () => {
                 </button>
                 <button
                   onClick={() => handleCompleteJob(job.key)}
-                  className={`btn-md-fill text-sm-s bg-green-90 text-white hover:text-green-90 focus:text-green-90 
+                  className={`btn-md-fill text-sm-s bg-dark text-white hover:text-dark focus:text-dark 
                     ${
                       job.status === "complete" || job.status === "cancelled"
                         ? "hidden"

@@ -5,8 +5,8 @@ import { useCookies } from "react-cookie";
 import { Link } from "react-router-dom";
 import formatName from "../helpers/formatName";
 import { useGetUser } from "../hooks/user";
-import { Token, User } from "../types";
 import { useStoreSearch } from "../hooks/zustand";
+import { Token, User } from "../types";
 
 export default function Navbar() {
   const [cookies, setCookie, removeCookie] = useCookies(["access-token"]);
@@ -59,8 +59,15 @@ export default function Navbar() {
     <nav className="fixed z-30 w-full top-0 bg-navbar bg-center">
       <div className="static max-w-screen-xl flex flex-row items-center gap-[20px] justify-between lg:justify-start mx-auto p-4">
         {/* Logo */}
-        <Link to={"/"} className="grid justify-items-center basis-20 items-center space-x-3">
-          <img src="/img/logo-quickjob.png" className="h-[40px]" alt="Flowbite Logo" />
+        <Link
+          to={"/"}
+          className="grid justify-items-center basis-20 items-center space-x-3"
+        >
+          <img
+            src="/img/logo-quickjob.png"
+            className="h-[40px]"
+            alt="Flowbite Logo"
+          />
           <span className="text-white text-md-s hidden lg:flex">QuickJob</span>
         </Link>
 
@@ -69,7 +76,7 @@ export default function Navbar() {
           <Link
             to={"/create-vacancy"}
             type="button"
-            className="hidden sm:flex w-[50px] md:w-[220px] xl:basis-1/5 gap-2 text-green-90 bg-gohan px-4 py-2 hover:bg-orange-90 hover:text-white focus:outline-none focus:bg-orange-90 focus:text-white font-bold rounded-lg text-center"
+            className="hidden sm:flex w-[50px] md:w-[220px] xl:basis-1/5 gap-2 text-dark bg-gohan px-4 py-2 hover:bg-blue-90 hover:text-white focus:outline-none focus:bg-blue-90 focus:text-white font-bold rounded-lg text-center"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -79,7 +86,11 @@ export default function Navbar() {
               stroke="currentColor"
               className="size-6"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 4.5v15m7.5-7.5h-15"
+              />
             </svg>
             <span className="hidden md:flex">Buat Lowongan</span>
           </Link>
@@ -120,8 +131,12 @@ export default function Navbar() {
 
         {/* Profile */}
         <div className="hidden lg:grid absolute h-[260px] lg:w-[240px] xl:w-[258px] gap-[20px] rounded-lg bg-white border-2 border-trunks border-opacity-10 p-[15px] top-[24px] right-[20px]">
-          <div className="w-full bg-green-90 flex justify-center items-center py-2 rounded-lg">
-            <img src="/img/user.jpg" alt="user" className="w-[50px] h-[50px] rounded-full" />
+          <div className="w-full bg-dark flex justify-center items-center py-2 rounded-lg">
+            <img
+              src="/img/user.jpg"
+              alt="user"
+              className="w-[50px] h-[50px] rounded-full"
+            />
           </div>
           <div className="flex flex-col items-center">
             <h1 className="text-bulma text-md-s">
@@ -133,13 +148,19 @@ export default function Navbar() {
           <ul className="h-full gap-3 lg:grid">
             <li className="flex flex-row items-center gap-[12px] cursor-pointer">
               <img src="/img/time.svg" alt="time" />
-              <Link to={"/riwayat"} className="text-sm-r hover:text-sm-s focus:text-sm-s">
+              <Link
+                to={"/riwayat"}
+                className="text-sm-r hover:text-sm-s focus:text-sm-s"
+              >
                 Riwayat
               </Link>
             </li>
             <li className="flex flex-row items-center gap-[12px] cursor-pointer">
               <img src="/img/log-out.svg" alt="logout" />
-              <button onClick={handleLogout} className="text-sm-r hover:text-sm-s focus:text-sm-s">
+              <button
+                onClick={handleLogout}
+                className="text-sm-r hover:text-sm-s focus:text-sm-s"
+              >
                 Log out
               </button>
             </li>
@@ -160,22 +181,34 @@ export default function Navbar() {
             >
               <div className="gap-[30px] absolute bg-white p-3 w-[150px] sm:w-[100px] right-5 lg:right-36 top-16 rounded-lg ">
                 <li className="flex sm:hidden flex-row items-center gap-[12px] cursor-pointer">
-                  <Link to={"/create-vacancy"} className="text-sm-r hover:text-sm-s focus:text-sm-s">
+                  <Link
+                    to={"/create-vacancy"}
+                    className="text-sm-r hover:text-sm-s focus:text-sm-s"
+                  >
                     Buat Lowongan
                   </Link>
                 </li>
                 <li className="flex sm:hidden flex-row items-center gap-[12px] cursor-pointer">
-                  <Link to={"/chat"} className="text-sm-r hover:text-sm-s focus:text-sm-s">
+                  <Link
+                    to={"/chat"}
+                    className="text-sm-r hover:text-sm-s focus:text-sm-s"
+                  >
                     Kotak Pesan
                   </Link>
                 </li>
                 <li className="flex flex-row items-center gap-[12px] cursor-pointer">
-                  <Link to={"/riwayat"} className="text-sm-r hover:text-sm-s focus:text-sm-s">
+                  <Link
+                    to={"/riwayat"}
+                    className="text-sm-r hover:text-sm-s focus:text-sm-s"
+                  >
                     Riwayat
                   </Link>
                 </li>
                 <li className="flex flex-row items-center gap-[12px] cursor-pointer">
-                  <button onClick={handleLogout} className="text-sm-r hover:text-sm-s focus:text-sm-s">
+                  <button
+                    onClick={handleLogout}
+                    className="text-sm-r hover:text-sm-s focus:text-sm-s"
+                  >
                     Log out
                   </button>
                 </li>
