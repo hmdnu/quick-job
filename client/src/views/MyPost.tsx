@@ -1,8 +1,24 @@
 import { useState } from "react";
-import { DUMMY_VACANCY } from "../constant";
+import Rating from "../components/Rating";
+import { DUMMY_VACANCY, REPORT } from "../constant";
 
 const MyPost = () => {
   const [jobs, setJobs] = useState(DUMMY_VACANCY);
+  const [confirmation, setConfirmation] = useState(false);
+  const [report, setReport] = useState(false);
+
+  const handleReport = () => {
+    setReport((prev) => !prev);
+  };
+
+  const handleOpenConfirmation = () => {
+    setConfirmation((prev) => !prev);
+    document.querySelector("body")?.classList.add("overflow-hidden");
+  };
+  const handleCloseConfirmation = () => {
+    setConfirmation((prev) => !prev);
+    document.querySelector("body")?.classList.remove("overflow-hidden");
+  };
 
   const handleCompleteJob = (key: number) => {
     setJobs((prevJobs) =>
@@ -18,6 +34,11 @@ const MyPost = () => {
         job.key === key ? { ...job, status: "cancelled" } : job
       )
     );
+  };
+
+  const handleDoneJob = (key: number) => {
+    handleCompleteJob(key);
+    handleOpenConfirmation();
   };
 
   return (
@@ -101,7 +122,7 @@ const MyPost = () => {
                 </svg>
               </button>
               <button
-                onClick={() => handleCompleteJob(job.key)}
+                onClick={() => handleDoneJob(job.key)}
                 className={`btn-md-fill text-sm-s bg-cell text-dark
                     ${
                       job.status === "complete" || job.status === "cancelled"
@@ -126,6 +147,61 @@ const MyPost = () => {
                   />
                 </svg>
               </button>
+              {confirmation && (
+                <div
+                  // onClick={handleCloseConfirmation}
+                  className="flex justify-center mx-auto items-center bg-[rgba(0,0,0,.5)] w-full h-screen fixed z-50 top-0 left-0 overflow-hidden"
+                >
+                  <div className="gap-[10px] absolute bg-white p-6 w-[250px] sm:w-[350px] rounded-lg ">
+                    <div className="grid justify-items-center gap-[10px]">
+                      <h1 className="text-center text-sm-s sm:text-md-s">
+                        Seberapa puas dengan hasil kerja {job.username} ?
+                      </h1>
+                      <Rating />
+                    </div>
+                    <button
+                      onClick={handleReport}
+                      className="underline text-blue-600 text-sm"
+                    >
+                      <span className={report ? "hidden" : ""}>Laporkan</span>
+                    </button>
+                    {report && (
+                      <div>
+                        {REPORT.map((report) => (
+                          <div
+                            key={report.key}
+                            className="flex justify-start gap-[5px]"
+                          >
+                            <input
+                              type="radio"
+                              name="reports"
+                              value={report.minus}
+                            />
+                            <h6>{report.title}</h6>
+                          </div>
+                        ))}
+                        <div
+                          onClick={handleCloseConfirmation}
+                          className="flex flexEnd gap-[10px]"
+                        >
+                          <button
+                            className="btn-md-fill text-sm-s bg-pink text-dark"
+                            type="submit"
+                          >
+                            Batal
+                          </button>
+                          <button
+                            className="btn-md-fill text-sm-s bg-cell text-dark"
+                            type="submit"
+                          >
+                            Submit
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         ))}

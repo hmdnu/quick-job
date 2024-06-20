@@ -124,3 +124,11 @@ export const DUMMY_CHAT = [
     message: "Thank you! Looking forward to hearing from you.",
   },
 ];
+
+export const REPORT = [
+  { key: 1, title: "Tidak Menyelesaikan Pekerjaan", minus: 5 },
+  { key: 2, title: "Pelanggaran Etika", minus: 5 },
+  { key: 3, title: "Pelecehan", minus: 5 },
+  { key: 4, title: "Spam", minus: 5 },
+  { key: 4, title: "Akun Palsu", minus: 5 },
+];
